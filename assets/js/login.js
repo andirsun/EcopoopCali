@@ -20,7 +20,8 @@ function autenticar(){
 			},
 			success:function(r){
 				if(r.response==2){
-					window.location.replace(base_url+'admin');
+					alert("logeado");
+					//window.location.replace(base_url+'admin');
 					// $(loader).html('<i class="fa fa-check success"></i>');
 					// checkDocument_ = true;
 				}else{

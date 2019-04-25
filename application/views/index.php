@@ -43,6 +43,7 @@
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-block ml-auto login_btn">Login</button>
+                            <button type="button" id="registerButton" class="btn btn-block ml-auto login_btn">Registro</button>
                         </div>
                         <div class="alert alert-danger py-2" style="display: none;" id="msg-login">
                             <h4 class="m-0 text-center" id="txt-login-msg"></h4>

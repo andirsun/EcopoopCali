@@ -1,4 +1,4 @@
-var userAdmin = "admin";
+/*var userAdmin = "admin";
 var passwordAdmin= "admin";
 var userLogin,passwordLogin;
 var userType;
@@ -33,5 +33,6 @@ function autenticar(){
     }
     
 }
+*/
 
 
