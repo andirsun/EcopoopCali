@@ -2,9 +2,10 @@
 
 class Login extends CI_Controller{
     function index(){
-        $this->load->view('index');
+        $this->load->view('registro');
         
 	}
+
 	public function makeLogin(){
 		$user = $this->input->get('user');
 		$pass = do_hash($this->input->get('pass'));
