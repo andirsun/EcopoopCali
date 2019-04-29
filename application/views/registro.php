@@ -7,7 +7,7 @@
     <title>Registro</title>
 
     <!-- Font Icon -->
-    <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/material-design-iconic-font.min.css">
+     <!--<link rel="stylesheet" href="<?php echo base_url() ?>assets/css/material-design-iconic-font.min.css">-->
 
     <!-- Main css -->
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/registro.css">
