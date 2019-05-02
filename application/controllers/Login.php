@@ -27,7 +27,7 @@ class Login extends CI_Controller{
 		echo json_encode($r);
 	}
 	public function registrar(){
-		$this->load->view('registro');
+		$this->load->view('principal');
 
 	/*
 	}

@@ -3,18 +3,19 @@ $(function(){
 	registrar();
 });
 
-function autenticar(){
+function registrar(){
 	$('#formRegistrar').submit(function(e){
 		e.preventDefault();
 		var form = this;
 		var data = $(this).serialize();
 		var btn = $(this).find('button');
 		$.ajax({
-			url: base_url+'admin_ajax/añadirUsuario',
+			url: base_url+'admin_ajax/addUsuario',
 			type: 'GET',
 			dataType: 'json',
 			data: data,
 			beforeSend:function(){
+				console.log("aqui voy");
 			},
 			success:function(r){
 				if(r.response==2){

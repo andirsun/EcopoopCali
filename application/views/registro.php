@@ -5,15 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Registro</title>
-
-    <!-- Font Icon -->
-     <!--<link rel="stylesheet" href="<?php echo base_url() ?>assets/css/material-design-iconic-font.min.css">-->
-
     <!-- Main css -->
+    <link href="<?php echo base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/registro.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
 </head>
 <body>
-
+    <script>var base_url = '<?echo base_url(); ?>'</script>
     <div class="main">
 
         <section class="signup">
@@ -29,11 +28,18 @@
                             <input type="email" class="form-input" name="email" id="email" placeholder="Tu Correo" requiered/>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-input" name="password" id="password" placeholder="Contraseña" requiered/>
+                            <input type="password" class="form-input" name="pass" id="password" placeholder="Contraseña" requiered/>
                         </div>
+                        <select class="form-control mb-4">
+                            <option>--Seleccione Proyecto--</option>
+                            <option value="1">Proyecto Prueba 1</option>
+                            <option value="2">Proyecto Prueba 2</option>
+                            <option value="3">Proyecto Prueba 3 </option>
+                        </select>
                         <div class="form-group">
                             <input type="submit" name="submit" id="submit" class="form-submit" value="Registrar"/>
                         </div>
+                        
                     </form>
                     <p class="loginhere">
                         Ya tienes una cuenta ? <a href="<?php echo base_url() ?>admin" class="loginhere-link">Inicia Sesion</a>

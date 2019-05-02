@@ -4,11 +4,32 @@ class Admin_ajax extends CI_Controller {
 	private $data;
 	public function __construct(){
 		parent::__construct();
-		$this->sucursal = $_SESSION['sucursal'];
+		//$this->sucursal = $_SESSION['sucursal'];
 		$this->data = array('view'=>'addUser');
 	}
 	public function index()	{
 		$this->load->view('admin/index',$this->data);
+	}
+	public function addUsuario(){
+		$array = array(
+			'nombre' =>$this->input->get('name'),
+			'contraseña' =>do_hash($this->input->get('pass')),
+			'nivel' =>2,
+			'correo' =>$this->input->get('email'),
+		);
+		$this->db->insert('usuarios',$array);
+		$id = $this->db->insert_id();
+		if ($id!=0){
+			$b['content'] = "Usuario añadido con exito";
+			$b['response'] = 2;
+			echo json_encode($b);
+		}
+		else{
+			$b['content'] = "Error al insertar el usuario";
+			$b['response'] = 1;
+			echo json_encode($b);
+		}
+
 	}
 	public function addUser(){
 		$id = $this->input->get('id');
