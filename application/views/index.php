@@ -9,10 +9,10 @@
   <title>Sigere</title>
   <!-- Bootstrap -->
   <link href="<?php echo base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet"> <!-- la base url es la pagina y el resto es la ruta donde se encuentra-->
-  <!--<link rel="stylesheet" href="<?php echo base_url() ?>assets/css/main.css">     -->
+
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/login.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  <!-- <link rel="icon" href="<?php echo base_url()?>assets/images/miniicono.png"> -->
+
 
 </head>
 
@@ -25,7 +25,7 @@
         <div class="d-flex justify-content-center h-100">
             <div class="card">
                 <div class="card-header">
-                    <h3>Sigere Inicio</h3>
+                    <h3>Sigere - Inicio</h3>
                 </div>
                 <div class="card-body">
                     <form id="formLogin">
@@ -43,7 +43,7 @@
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-block ml-auto login_btn">Login</button>
-                            <button type="button" id="registerButton" class="btn btn-block ml-auto login_btn">Registro</button>
+                           
                         </div>
                         <div class="alert alert-danger py-2" style="display: none;" id="msg-login">
                             <h4 class="m-0 text-center" id="txt-login-msg"></h4>
@@ -57,7 +57,8 @@
   <script src="<?php echo base_url() ?>assets/js/jquery-3.3.1.min.js" type="text/javascript"></script>
   <script src="<?php echo base_url() ?>assets/js/bootstrap.min.js"></script>
   <script src="<?php echo base_url() ?>assets/js/main.js?<?php echo strtotime(date('Y-m-d H:i:s')) ?>"></script>
-  <script src="<?php echo base_url() ?>assets/js/login.js?<? echo time_unix(); ?>"></script>
+  <script src="<?php echo base_url() ?>assets/js/login.js?"></script>
+  
 </body>
 
 </html>

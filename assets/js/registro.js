@@ -1,4 +1,37 @@
-(function($) {
+$(function(){ 	
+	console.log(666);
+	registrar();
+});
+
+function autenticar(){
+	$('#formRegistrar').submit(function(e){
+		e.preventDefault();
+		var form = this;
+		var data = $(this).serialize();
+		var btn = $(this).find('button');
+		$.ajax({
+			url: base_url+'admin_ajax/añadirUsuario',
+			type: 'GET',
+			dataType: 'json',
+			data: data,
+			beforeSend:function(){
+			},
+			success:function(r){
+				if(r.response==2){
+					alert("Usuario añadido con exito")
+				}else{
+					alert("Error Al añadir");
+				}
+				console.log(r);
+			},
+			error:function(xhr, status, msg){
+				console.log(xhr.responseText);
+			}
+		});
+	});
+}
+
+/*(function($) {
 
     $(".toggle-password").click(function() {
 
@@ -12,3 +45,4 @@
       });
 
 })(jQuery);
+*/
