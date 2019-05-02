@@ -20,7 +20,7 @@
             <!-- <img src="images/signup-bg.jpg" alt=""> -->
             <div class="container">
                 <div class="signup-content">
-                    <form id="signup-form" class="signup-form">
+                    <form id="formRegistrar" class="signup-form">
                         <h2 class="form-title"> Crear una cuenta</h2>
                         <div class="form-group">
                             <input type="text" class="form-input" name="name" id="name" placeholder="Tu Nombre" required/>
@@ -32,11 +32,11 @@
                             <input type="password" class="form-input" name="password" id="password" placeholder="Contraseña" requiered/>
                         </div>
                         <div class="form-group">
-                            <input type="submit" name="submit" id="submit" class="form-submit" value="Registrate    "/>
+                            <input type="submit" name="submit" id="submit" class="form-submit" value="Registrar"/>
                         </div>
                     </form>
                     <p class="loginhere">
-                        Ya tienes una cuenta ? <a href="<?php echo base_url() ?>application/views/index.php" class="loginhere-link">Inicia Sesion</a>
+                        Ya tienes una cuenta ? <a href="<?php echo base_url() ?>admin" class="loginhere-link">Inicia Sesion</a>
                     </p>
                 </div>
             </div>
