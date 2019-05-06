@@ -18,6 +18,7 @@ class Admin extends CI_Controller {
 		$this->load->view('index');//el segundo paramento $this->data es que le paso paramentro a esa vista $this->data = array('view'=>'home');
 	}
 	
+	
 	/*
 	public function nav(){
 		$uri = $this->uri->segment(3);// El segmento 3 de la url /1/2/3
