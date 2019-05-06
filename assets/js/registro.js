@@ -1,6 +1,7 @@
 $(function(){ 	
-	console.log(666);
+	console.log(6666);
 	registrar();
+	getProyects();
 });
 
 function registrar(){
@@ -9,6 +10,10 @@ function registrar(){
 		var form = this;
 		var data = $(this).serialize();
 		var btn = $(this).find('button');
+		var nombre = $("#name").val();
+		var contraseña = $("#email").val();
+		var correo = $("#pass").val("value");
+		var idProyecto = $("#proyect").attr("value");
 		$.ajax({
 			url: base_url+'admin_ajax/addUsuario',
 			type: 'GET',
@@ -31,7 +36,30 @@ function registrar(){
 		});
 	});
 }
-
+function getProyects(){
+	$.ajax({
+		url: base_url+'admin_ajax/getProyects',
+		type: 'GET',
+		dataType: 'json',
+		beforeSend:function(){
+		},
+		success:function(r){
+			console.log(r.content);
+			var select = $('select#proyect');
+			var str = '<option value="" selected>Seleccione...</option>';
+			if(r.response==2){
+				$.each(r.content,function(index, el){
+					str += '<option value="'+el.idProyecto+'">'+el.nombre+'</option>';
+				});
+				$(select).html(str);
+			}
+			// console.log(r);
+		},
+		error:function(xhr, status, msg){
+			console.log(xhr.responseText);
+		}
+	});
+}
 /*(function($) {
 
     $(".toggle-password").click(function() {

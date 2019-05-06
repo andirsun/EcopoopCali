@@ -6,30 +6,31 @@ class Admin extends CI_Controller {
 	private $data;
 	public function __construct(){
 		parent::__construct();
-		$this->data = array('view'=>'addUser');
+		$this->data = array('view'=>'registro');
 		//$this->sucursal = $_SESSION['sucursal'];
+		
 		if(!isset($_SESSION['data_user'])){ //Proteccion de acceso por la url
 			redirect('login','refresh');//envia a login y refrezcs
 		}
+		/*
 		$this->data['level'] = $_SESSION['data_user']->level;
-
+		*/
 	}
-	public function index()	{ // siempre debe ir aqui 
-		$this->load->view('index');//el segundo paramento $this->data es que le paso paramentro a esa vista $this->data = array('view'=>'home');
+	public function index()	{ 
+		$this->load->view('principal',$this->data);
 	}
 	
-	
-	/*
-	public function nav(){
-		$uri = $this->uri->segment(3);// El segmento 3 de la url /1/2/3
+	public function nav(){ // para redirigir los apartados de proyectos etc
+		$uri = $this->uri->segment(3);
 		if($uri!=null){
-			$this->data['view'] = $uri; // =si no hay nada en el segmento 3 entonces redirije a 
+			$this->data['view'] = $uri;
 		}
 		$method = '_'.$uri;
 		if(method_exists($this, $method)){
 			$this->$method();
 		}
-		$this->load->view('admin/index',$this->data);
+		
+		$this->load->view('principal',$this->data);
 	}
 
 	public function verDatos(){
@@ -37,7 +38,10 @@ class Admin extends CI_Controller {
 			var_dump($_GET);
 		echo '</pre>';
 	}
-
+	public function registro()	{ // siempre debe ir aqui 
+		$this->load->view('registro');//el segundo paramento $this->data es que le paso paramentro a esa vista $this->data = array('view'=>'home');
+	}
+	/*
 	public function _clasesStudent(){
 		$idUser = $this->uri->segment(4);
 		$this->data['idUser'] = $idUser;
