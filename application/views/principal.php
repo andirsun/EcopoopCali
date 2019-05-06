@@ -5,19 +5,21 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-	<title>Eddy music academy</title>
+	<title>SIGERE-2019</title>
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="<?php echo base_url() ?>assets/css/bootstrap.min.css">
-	<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet"> -->
+	<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet"> 
 	<link rel="stylesheet" href="<?php echo base_url() ?>assets/js/plugins/dataTable/datatables.min.css">
-	<link rel="stylesheet" href="<?php echo base_url() ?>assets/css/styles.css?<? echo time_unix(); ?>">
-	<link rel="stylesheet" href="<?php echo base_url() ?>assets/css/main.css?<? echo time_unix(); ?>">
+	-->
+	<!--<link rel="stylesheet" href="<?php echo base_url() ?>assets/css/styles.css?">-->
+	<link rel="stylesheet" href="<?php echo base_url() ?>assets/css/main.css?">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
 </head>
 <body>
 	<script src="<?php echo base_url() ?>assets/js/jquery-3.3.1.min.js" type="text/javascript"></script>
-	<script>var active = '<?echo $view ?>';  var base_url = '<?echo base_url() ?>'; var level = <?php echo $level; ?></script>
+	<!--<script>var active = '<?echo $view ?>';  var base_url = '<?echo base_url() ?>'; var level = <?php echo $level; ?></script>-->
+	<script> var base_url = '<?echo base_url() ?>'</script>
 	<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
 		<!-- <span class="navbar-brand col-sm-3 col-md-2 mr-0 titleMenu">Academia Eddy Music</span> -->
 		<span class="navbar-brand pl-2 pr-3 titleMenu">Sistema Gestor de Requisitos</span>
@@ -25,6 +27,7 @@
 		<button class="navbar-toggler" id="toggleMenu" data-status="0">
 			<span class="navbar-toggler-icon"></span>
 		</button>
+		<!--
 			<ul class="navbar-nav px-3 menuHead">
 				<?php if ($level==0): ?>
 					<li class="nav-item text-nowrap" id="item-sucursal">
@@ -33,6 +36,7 @@
 						</button>
 					</li>
 				<?php endif ?>
+				-->
 				<li class="nav-item text-nowrap">
 					<a href="<?php echo base_url() ?>login/logout" id="botonsalir">
 						<button type="button" class="btn btn-menu">
@@ -46,7 +50,7 @@
 		<div class="row">
 			<?php require __DIR__.'/sidebar.php'; ?>
 			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 px-sm-1">
-				<?php require __DIR__.'/'.$view.'.php'; ?>
+			 <?php require __DIR__.'/'.$view.'.php'; ?>
 			</main>
 		</div>
 	</div>
@@ -83,6 +87,6 @@
 	<script src="<?php echo base_url() ?>assets/js/bootstrap.min.js"></script>
 	<script src="<?php echo base_url() ?>assets/js/plugins/dataTable/datatables.min.js"></script>
 	<script src="<?php echo base_url() ?>assets/js/plugins/jquery-number/jquery.number.min.js"></script>
-	<script src="<?php echo base_url() ?>assets/js/admin/principal.js?<? echo time_unix(); ?>"></script>
+	<script src="<?php echo base_url() ?>assets/js/admin/principal.js?"></script>
 	</body>
 </html>

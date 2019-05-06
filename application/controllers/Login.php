@@ -7,7 +7,6 @@ class Login extends CI_Controller{
 	}
     public function index(){
         $this->load->view('index');
-        
 	}
 
 	public function makeLogin(){
@@ -29,7 +28,9 @@ class Login extends CI_Controller{
 	public function registrar(){
 		$this->load->view('principal');
 
-	/*
+	}
+	public function registro()	{ // siempre debe ir aqui 
+		$this->load->view('registro');//el segundo paramento $this->data es que le paso paramentro a esa vista $this->data = array('view'=>'home');
 	}
     public function verDatos(){
 		echo '<pre>';
@@ -40,6 +41,5 @@ class Login extends CI_Controller{
 		session_destroy();
 		redirect('login/index','refresh');
 	}
-	*/
-	}
+	
 }

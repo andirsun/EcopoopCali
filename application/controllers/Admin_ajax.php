@@ -1,4 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
+//Generado desde el servidor
 
 class Admin_ajax extends CI_Controller {
 	private $data;

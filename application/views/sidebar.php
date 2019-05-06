@@ -3,47 +3,22 @@
 		<ul class="nav flex-column">
 			<li class="nav-item">
 				<a class="nav-link" data-active="addUser" href="<?echo base_url() ?>admin/nav/addUser" id="botonAlumno">
-					<i class="fas fa-users fa-lg"></i>
-					Alumnos
+					<i class="fas fa-project-diagram fa-lg"></i>
+					Mis Proyectos
 					<span class="sr-only">(current)</span>
 				</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link " data-active="directorio" href="<?echo base_url() ?>admin/nav/directorio" id="botonAlumno">
-					<i class="fas fa-book fa-lg"></i>
-					Directorio
-					<span class="sr-only">(current)</span>
-				</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="<?echo base_url() ?>admin/nav/bitacoras" id="botonBitacoras">
 					<i class="fas fa-tasks fa-lg"></i>
-					Bitacoras
+					Requisitos
 					<span class="sr-only">(current)</span>
-				</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="<?echo base_url() ?>admin/nav/profesores" id="botonProfesores">
-					<i class="fas fa-chalkboard-teacher fa-lg"></i>
-					Profesores
 				</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="<?echo base_url() ?>admin/nav/horarios" id="botonHorarios">
 					<i class="far fa-calendar-alt fa-lg"></i>
 					Horarios
-				</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="<?echo base_url() ?>admin/nav/ingresos" id="botonIngresos">
-					<i class="fas fa-money-bill-alt fa-lg"></i>
-					Ingresos
-				</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="<?echo base_url() ?>admin/nav/egresos" id="botonEgresos">
-					<i class="fas fa-money-bill-alt fa-lg"></i>
-					Egresos
 				</a>
 			</li>
 			<li class="nav-item">
@@ -55,6 +30,12 @@
 			<li class="nav-item">
 				<a href="<?php echo base_url() ?>login/logout" class="nav-link">
 					<i class="fas fa-sign-out-alt fa-lg"></i> Salir
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" data-active="configuracion" href="<?echo base_url() ?>login/registro" id="botonConfiguracion">
+					<i class="fas fa-tools fa-lg"></i>
+					Registrar Usuario
 				</a>
 			</li>
 		</ul>
