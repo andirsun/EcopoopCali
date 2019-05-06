@@ -2,7 +2,7 @@
 	<div class="sidebar-sticky">
 		<ul class="nav flex-column">
 			<li class="nav-item">
-				<a class="nav-link" data-active="addUser" href="<?echo base_url() ?>admin/nav/addUser" id="botonAlumno">
+				<a class="nav-link" data-active="addUser" href="<?echo base_url() ?>admin/nav/proyectos" id="botonAlumno">
 					<i class="fas fa-project-diagram fa-lg"></i>
 					Mis Proyectos
 					<span class="sr-only">(current)</span>
@@ -33,8 +33,8 @@
 				</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" data-active="configuracion" href="<?echo base_url() ?>login/registro" id="botonConfiguracion">
-					<i class="fas fa-tools fa-lg"></i>
+				<a class="nav-link" data-active="configuracion" href="<?echo base_url() ?>admin/registro" id="botonConfiguracion">
+				<i class="fas fa-user-plus fa-lg"></i>
 					Registrar Usuario
 				</a>
 			</li>

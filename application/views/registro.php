@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Registro</title>
+    <title>Sigere-Registro</title>
     <!-- Main css -->
     <link href="<?php echo base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/registro.css">
@@ -28,13 +28,11 @@
                             <input type="email" class="form-input" name="email" id="email" placeholder="Tu Correo" requiered/>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-input" name="pass" id="password" placeholder="Contraseña" requiered/>
+                            <input type="password" class="form-input" name="pass" id="pass" placeholder="Contraseña" requiered/>
                         </div>
-                        <select class="form-control mb-4">
+                        <select class="form-control mb-4" id="proyect">
                             <option>--Seleccione Proyecto--</option>
-                            <option value="1">Proyecto Prueba 1</option>
-                            <option value="2">Proyecto Prueba 2</option>
-                            <option value="3">Proyecto Prueba 3 </option>
+                            
                         </select>
                         <div class="form-group">
                             <input type="submit" name="submit" id="submit" class="form-submit" value="Registrar"/>
@@ -42,7 +40,7 @@
                         
                     </form>
                     <p class="loginhere">
-                        Ya tienes una cuenta ? <a href="<?php echo base_url() ?>admin" class="loginhere-link">Inicia Sesion</a>
+                       <a href="<?php echo base_url() ?>admin/nav/proyectos" class="loginhere-link">REGRESAR</a>
                     </p>
                 </div>
             </div>
