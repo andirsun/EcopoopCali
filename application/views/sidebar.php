@@ -1,6 +1,9 @@
 <nav class="col-md-2 bg-light sidebar" id="sidebar">
 	<div class="sidebar-sticky">
 		<ul class="nav flex-column">
+			<li class="nav-item text-nowrap" id="nombreUsuario">
+				<i class="fas fa-user-tie fa-3x ml-3 mb-4 mr-3"></i>Usuario<i class="fas fa-circle mr-2 ml-2" style="color:#3ec63e"></i><b><i style="color:#3ec63e">en linea</i></b>
+			</li>
 			<li class="nav-item">
 				<a class="nav-link" data-active="addUser" href="<?echo base_url() ?>admin/nav/proyectos" id="botonAlumno">
 					<i class="fas fa-project-diagram fa-lg"></i>

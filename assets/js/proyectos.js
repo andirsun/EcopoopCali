@@ -76,8 +76,8 @@ function buildTrProyect(listProyect) {
 		$(tr).find('#Descripcion').text(el.descripcion);
 		$(tr).find('#editarProyecto').attr('value', el.id);
 		//$(tr).find('#borrarUsuario').attr('value', el.id);
-		$(tr).find("#ProyectoRequerimientos").attr('href', base_url+'admin/nav/requerimientos/'+el.id);
-		$(tr).find("#ProyectoRequerimientos").attr('value', el.id);
+		$(tr).find("#proyectoRequerimientos").attr('href', base_url+'admin/nav/requisitosProyect/'+el.id);
+		$(tr).find("#proyectoRequerimientos").attr('value', el.id);
 		str += $(tr).prop('outerHTML');
 	});
 	return str;

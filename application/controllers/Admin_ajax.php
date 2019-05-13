@@ -11,6 +11,39 @@ class Admin_ajax extends CI_Controller {
 	public function index()	{
 		$this->load->view('admin/index',$this->data);
 	}
+	public function addRequisito(){
+		$array = array(
+			'idRequisito' =>$this->input->get('idReq'),
+			'version' =>$this->input->get('versionReq'),
+			'tipo' =>$this->input->get('tipoReq'),
+			'descripcion' =>$this->input->get('descripcionReq'),
+			'dependencia' =>$this->input->get('dependenciaReq'),
+			'interfaz' =>$this->input->get('interfazReq'),
+			'importancia' =>$this->input->get('importanciaReq'),
+			'prioridad' =>$this->input->get('prioridadReq'),
+			'estado' =>"Activo",
+		);
+		$this->db->insert('requerimientos',$array);
+		$id = $this->db->insert_id();
+		if ($id!=0){
+			
+			$a = array(
+				'idRequisito' =>$this->input->get('idReq'),
+				'idProyecto' =>$this->input->get('idProyecto'),
+				'agregado' => date('Y-m-d H:i:s'), 
+			);
+			$this->db->insert('requisitosxProyecto',$a);
+			$b['content'] = "Requerimiento añadido con exito";
+			$b['response'] = 2;
+			echo json_encode($b);
+		}
+		else{
+			$b['content'] = "Error al insertar el Requerimiento";
+			$b['response'] = 1;
+			echo json_encode($b);
+		}
+
+	}
 	public function addUsuario(){
 		$array = array(
 			'nombre' =>$this->input->get('name'),
@@ -61,6 +94,20 @@ class Admin_ajax extends CI_Controller {
 			echo json_encode($b);
 		}
 
+	}
+	public function nombreProyecto(){
+		$id=$this->input->get('id');
+		$sql = $this->db->select('nombre')->where('id',$id)->get('proyectos');
+		if($sql->num_rows()!=0 ){
+			$b['content'] = $sql->result()[0];
+			$b['response'] = 2;
+		}else{
+			$b['content'] = "No se encontro el proyecto";
+			$b['response'] = 2;
+		}
+		
+		echo json_encode($b);
+		
 	}
 	public function getProyects(){ //Para llenar la tabla de los usuarios
 		//$sql = $this->db/*->where('creador',$_SESSION['nombre'])*/->order_by('nombre asc')->get('proyectos'); //ordena pro orden alfabetico

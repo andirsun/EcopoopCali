@@ -19,7 +19,7 @@
                 <td id="Nombre">Nombre </td>
                 <td id="Descripcion">Descripcion</td>
                 <td class="d-inline-flex d-none">
-                    <button type="button" id="editarProyecto" class="btn btn-warning" value=''>
+                    <button type="button" id="editarProyecto" class="btn btn-warning mr-3" value=''>
                         <i class="fas fa-edit"></i>
                     </button>
                     <!--<?php if ($level==0 || $level==4): ?>
@@ -27,7 +27,7 @@
                             <i class="fas fa-trash"></i>
                         </button>
                     <?php endif ?>-->
-                    <a href="#" id="usuarioCalendario" target="_blank" class="btn btn-primary" value=''>
+                    <a href="#" id="proyectoRequerimientos" target="_blank" class="btn btn-primary" value=''>
                     <i class="fas fa-tasks"></i>
                     </a>
                     </td>

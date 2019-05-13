@@ -20,6 +20,7 @@
     <video autoplay muted loop id="myVideo">
         <source src="<?php echo base_url()?>assets/videos/discussing_features.webm" type="video/mp4">
     </video>
+    <audio autoplay src="<?php echo base_url()?>assets/music/musica.mp3"></audio>
     <script>var base_url = '<?echo base_url(); ?>'</script>
     <div class="container">
         <div class="d-flex justify-content-center h-100">
