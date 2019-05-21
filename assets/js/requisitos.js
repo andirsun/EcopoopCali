@@ -110,10 +110,12 @@ function setTitulo(){
 	});
 }
 function getRequisitos(){
+	alert(idProyect);
 	$.ajax({
 		url: base_url+'admin_ajax/getRequisitos',
 		type: 'GET',
 		dataType: 'json',
+		data:idProyect,
 		beforeSend:function(){
 		},
 		success:function(r){

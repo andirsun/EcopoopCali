@@ -128,7 +128,7 @@ class Admin_ajax extends CI_Controller {
 		echo json_encode($r);
 	}
 	public function getRequisitos(){ //Para llenar la tabla de los usuarios
-		$idProyecto=$this->input->get('idProyecto');
+		$idProyecto=$this->input->get('idProyect');
 		$sql = $this->db->where('idProyecto',$idProyecto)->get('requisitosxProyecto');
 		$r['response'] = 2;
 		$r['content'] = $sql->result();
