@@ -110,12 +110,13 @@ function setTitulo(){
 	});
 }
 function getRequisitos(){
-	alert(idProyect);
+	var idProyecto = 1;
 	$.ajax({
 		url: base_url+'admin_ajax/getRequisitos',
 		type: 'GET',
 		dataType: 'json',
-		data:idProyect,
+		data:{idproyectoo:idProyecto
+		},
 		beforeSend:function(){
 		},
 		success:function(r){
@@ -235,7 +236,7 @@ function construirTablaRequisito(listProyect) {
 		$(tr).attr('data-id', el.id);
 		$(tr).find('#idRequisito').text(el.idProyecto);
 		$(tr).find('#Nombre').text(el.nombre);
-		$(tr).find('#Creacion').text(el.fechaCreacion);
+		$(tr).find('#Creacion').text(el.agregado);
 		$(tr).find('#Descripcion').text(el.descripcion);
 		$(tr).find('#editarRequisito').attr('value', el.id);
 		//$(tr).find('#borrarUsuario').attr('value', el.id);

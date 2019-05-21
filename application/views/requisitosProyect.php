@@ -23,11 +23,11 @@
             </thead>
             <tbody>  
                 <tr id="trClone">
-                    <th scope="row"  id="idRequisito">ID</th>
-                    <td id="Creacion">Creacion</td>
-                    <td id="Nombre">Nombre </td>
-                    <td id="Descripcion">Descripcion</td>
-                    
+                    <th scope="row"  id="idRequisito"></th>
+                    <td id="Creacion"></td>
+                    <td id="Nombre"></td>
+                    <td id="Descripcion"></td>
+                    <td>Documentos</td>
                     <td class="d-inline-flex d-none">
                         <button type="button" id="editarRequisito" class="btn btn-warning mr-3" value=''>
                             <i class="fas fa-edit"></i>
@@ -40,7 +40,7 @@
                         <a href="#" id="proyectoRequerimientos" target="_blank" class="btn btn-primary" value=''>
                         <i class="fas fa-tasks"></i>
                         </a>
-                        </td>
+                    </td>
                 </tr> 
             </tbody>
         </table>
@@ -73,7 +73,7 @@
                     <textarea type="text" class="form-control" name="descripcionReq" id="descripcionReq" placeholder="Cuenta de que se trata el requisito.." required></textarea>
                 </fieldset>	
                 <fieldset class="form-group col-sm-2">
-                    <label>Descripcion</label>
+                    <label>Dependencia</label>
                     <textarea type="text" class="form-control" name="dependenciaReq" id="dependenciaReq" placeholder="Escribe los requisitos de los que depende" required></textarea>
                 </fieldset>
                 <fieldset class="form-group col-sm-2">
