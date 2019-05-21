@@ -17,6 +17,7 @@
                     <th>Creacion</th>
                     <th>Nombre </th>
                     <th>Descripcion</th>
+                    <th>Documentos</th>
                     <th >Acciones</th>
                 </tr>
             </thead>
@@ -26,6 +27,7 @@
                     <td id="Creacion">Creacion</td>
                     <td id="Nombre">Nombre </td>
                     <td id="Descripcion">Descripcion</td>
+                    
                     <td class="d-inline-flex d-none">
                         <button type="button" id="editarRequisito" class="btn btn-warning mr-3" value=''>
                             <i class="fas fa-edit"></i>
@@ -104,18 +106,49 @@
                 </fieldset>
                 <fieldset class="form-group m-0 col-sm-1">
                     <label>Proyecto</label>
-                    <input type="number" class="form-control" id="idProyecto" name="idProyecto" value="<?php echo $idProyect?>" disabled><?php echo $idProyect?></input>
+                    <input type="number" class="form-control" id="idProyecto" name="idProyecto" value="<?php echo $idProyect?>" id="idProyecto" placeholder="<?php echo $idProyect?>" disabled>
                 </fieldset>
             </div>
+            <div class="row">
+                <div class="col-sm-2 d-flex mt-3">
+                    <button type="submit" class="btn btn-block btn-success align-self-end">
+                        Crear Requisito
+                    </button>
+                </div>
             </div>
-            <div class="col-sm-2 d-flex mt-3">
-                <button type="submit" class="btn btn-block btn-success align-self-end">
-                    Crear Requisito
-                </button>
-            </div>
-            
         </form>
     </div>
+</div>
+<button type="hidden" hidden data-toggle="modal" data-target=".bd-example-modal-lg" id="btn-open-modal-cv"></button>
+<!-- Modal para ver el archivo pdf de la hoja de vida usuario -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content p-2">
+      <h2>Hoja de vida</h2>
+      <iframe src="" id="iframe-pdf" class="mb-2" style="display:none;width:100%;height:400pt;" frameborder="0"></iframe>
+      <form class="d-inline-block mt-4" id="form-file-cv">
+        <input type="hidden" id="idTeacher">
+        <div class="d-flex mb-2">
+          <input type="file" name="file" id="file-cv" class="file-cv" accept="application/pdf" required>
+          <label for="file-cv" class="label-cv">
+            <span class="one-file">1 archivo</span>
+            <i class="fas fa-file-upload mr-1"></i>
+            Seleccionar archivo
+          </label>
+          <button type="submit" class="btn btn-success rounded-0">
+            <i class="fas fa-save mr-1"></i> Guardar 
+          </button>
+          <button type="button" class="ml-1 btn btn-danger rounded-0" id="clearInputFileCv">
+            <i class="fas fa-eraser mr-1"></i> Limpiar
+          </button>
+        </div>
+        <div class="progress-bard-file" id="progress" style="display: none;"></div>
+<!--         <span class="num-files" id="file-cv-info">
+          nombre del archivo
+        </span> -->
+      </form>
+    </div>
+  </div>
 </div>
 <script>
 	var idProyecto = '<? echo $idProyect ?>';

@@ -38,7 +38,7 @@
 			<li class="nav-item">
 				<a class="nav-link" data-active="configuracion" href="<?echo base_url() ?>admin/registro" id="botonConfiguracion">
 				<i class="fas fa-user-plus fa-lg"></i>
-					Registrar Usuario
+					Registrar Contribuidor
 				</a>
 			</li>
 		</ul>

@@ -27,13 +27,12 @@ class Admin_ajax extends CI_Controller {
 		$id = $this->db->insert_id();
 		if ($id!=0){
 			
-			$a = array(
-				'idRequisito' =>$this->input->get('idReq'),
-				'idProyecto' =>$this->input->get('idProyecto'),
-				'agregado' => date('Y-m-d H:i:s'), 
-			);
-			$this->db->insert('requisitosxProyecto',$a);
-			$b['content'] = "Requerimiento añadido con exito";
+			//$a = array(
+			//	'idRequisito' =>$this->input->get('idReq'),
+			//	'idProyecto' =>$this->input->get('idProyecto'),
+			//	'agregado' => date('Y-m-d H:i:s'), 
+			//);
+			$b['content'] = $id;
 			$b['response'] = 2;
 			echo json_encode($b);
 		}
@@ -42,6 +41,18 @@ class Admin_ajax extends CI_Controller {
 			$b['response'] = 1;
 			echo json_encode($b);
 		}
+
+	}
+	public function addRequisitoXproyecto(){
+		$a = array(
+				'idRequisito' =>$this->input->get('idRequisito'),
+				'idProyecto' =>$this->input->get('idProyecto'),
+				'agregado' => date('y-m-d H:i:s'),
+				);
+		$this->db->insert('requisitosxProyecto',$a);
+		$b['content'] = "Vinculado correctamente";
+		$b['response'] = 2;
+		echo json_encode($b);
 
 	}
 	public function addUsuario(){
@@ -112,6 +123,13 @@ class Admin_ajax extends CI_Controller {
 	public function getProyects(){ //Para llenar la tabla de los usuarios
 		//$sql = $this->db/*->where('creador',$_SESSION['nombre'])*/->order_by('nombre asc')->get('proyectos'); //ordena pro orden alfabetico
 		$sql = $this->db->get('proyectos');
+		$r['response'] = 2;
+		$r['content'] = $sql->result();
+		echo json_encode($r);
+	}
+	public function getRequisitos(){ //Para llenar la tabla de los usuarios
+		$idProyecto=$this->input->get('idProyecto');
+		$sql = $this->db->where('idProyecto',$idProyecto)->get('requisitosxProyecto');
 		$r['response'] = 2;
 		$r['content'] = $sql->result();
 		echo json_encode($r);
