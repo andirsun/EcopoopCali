@@ -1,7 +1,7 @@
 $(function(){ 	
 	console.log(6666);
 	registrar();
-	getProyects();
+	//getProyects();
 });
 
 function registrar(){

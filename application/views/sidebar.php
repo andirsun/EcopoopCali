@@ -5,19 +5,20 @@
 				<i class="fas fa-user-tie fa-3x ml-3 mb-4 mr-3"></i>Usuario<i class="fas fa-circle mr-2 ml-2" style="color:#3ec63e"></i><b><i style="color:#3ec63e">en linea</i></b>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" data-active="addUser" href="<?echo base_url() ?>admin/nav/proyectos" id="botonAlumno">
+				<a class="nav-link" data-active="misproyectos" href="<?echo base_url() ?>admin/nav/proyectos" id="botonAlumno">
 					<i class="fas fa-project-diagram fa-lg"></i>
 					Mis Proyectos
 					<span class="sr-only">(current)</span>
 				</a>
 			</li>
+			<!--
 			<li class="nav-item">
 				<a class="nav-link " data-active="directorio" href="<?echo base_url() ?>admin/nav/directorio" id="botonAlumno">
 					<i class="fas fa-tasks fa-lg"></i>
 					Requisitos
 					<span class="sr-only">(current)</span>
 				</a>
-			</li>
+			</li>-->
 			<li class="nav-item">
 				<a class="nav-link" href="<?echo base_url() ?>admin/nav/horarios" id="botonHorarios">
 					<i class="far fa-calendar-alt fa-lg"></i>

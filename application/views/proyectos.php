@@ -19,7 +19,15 @@
                 <td id="Nombre">Nombre </td>
                 <td id="Descripcion">Descripcion</td>
                 <td class="d-inline-flex d-none">
-                    <button type="button" id="editarProyecto" class="btn btn-warning mr-3" value=''>
+                    <a href="#" id="contribuidores" target="_blank" class="btn btn-success mr-3 btn-sm" value=''>
+                        Contribuidores
+                        <i class="fas fa-users"></i>
+                    </a>
+                    <button type="button" id="descargarSrs" class="btn btn-danger mr-3 btn-sm" value=''>
+                        SRS
+                        <i class="fas fa-file-download"></i>
+                    </button>
+                    <button type="button" id="editarProyecto" class="btn btn-warning mr-3 btn-sm" value=''>
                         Editar Proyecto
                         <i class="fas fa-edit"></i>
                     </button>
@@ -28,7 +36,7 @@
                             <i class="fas fa-trash"></i>
                         </button>
                     <?php endif ?>-->
-                    <a href="#" id="proyectoRequerimientos" target="_blank" class="btn btn-primary" value=''>
+                    <a href="#" id="proyectoRequerimientos" target="_blank" class="btn btn-primary btn-sm" value=''>
                         Requisitos
                         <i class="fas fa-tasks"></i>
                     </a>

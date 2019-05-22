@@ -127,9 +127,16 @@ class Admin_ajax extends CI_Controller {
 		$r['content'] = $sql->result();
 		echo json_encode($r);
 	}
-	public function getRequisitos(){ //Para llenar la tabla de los usuarios
+	public function getRequisitosFuncionales(){ //Para llenar la tabla de los usuarios
 		$idProyecto=$this->input->get('idProyecto');
-		$sql = $this->db->where('idProyecto',1)->get('requisitosxProyecto');
+		$sql = $this->db->select('requerimientos.idRequisito reqId,agregado,descripcion,version,interfaz,dependencia,estado,requisitosxProyecto.*')->where('idProyecto',1)->where('tipo',"funcional")->join('requerimientos','requerimientos.id = requisitosxProyecto.idRequisito')->get('requisitosxProyecto');
+		$r['response'] = 2;
+		$r['content'] = $sql->result();
+		echo json_encode($r);
+	}
+	public function getRequisitosNoFuncionales(){ //Para llenar la tabla de los usuarios
+		$idProyecto=$this->input->get('idProyecto');
+		$sql = $this->db->select('requerimientos.*,requisitosxProyecto.*')->where('idProyecto',1)->where('tipo',"Nofuncional")->join('requerimientos','requerimientos.id = requisitosxProyecto.idRequisito')->get('requisitosxProyecto');
 		$r['response'] = 2;
 		$r['content'] = $sql->result();
 		echo json_encode($r);
@@ -158,6 +165,44 @@ class Admin_ajax extends CI_Controller {
 	public function getLevelCurrentUser(){
 		$r['response'] = 2;
 		$r['content'] = $_SESSION['data_user']->level;
+		echo json_encode($r);
+	}
+	public function enviarDiagrama1(){
+		$id = $this->input->post('idRequisito');//llega el id largo del requisito
+		$file = file_get_contents($_FILES['file']['tmp_name']);
+		$idGlobal = $this->db->select('requerimientos.id')->where('idRequisito',$id)->get('requerimientos')->result();
+		//$check = $this->db->where('idRequisito',$idGlobal)->get('requerimientos')->num_rows() > 0;
+		
+		$a = array(
+			'diagrama1' => $file
+		);
+		
+		$this->db->where('id',15)->update('requerimientos',$a);
+		//if($check){
+			//$this->db->where('id',$idGlobal)->update('requerimientos',$a);
+		//}
+		/*else{
+			$a['idRequisito'] = $idGlobal;
+			$this->db->insert('requerimientos',$a);
+		*/
+		//}
+		$r['response'] = 2;
+		$r['content'] = 'saved';
+		$r['idRequisito'] = $idGlobal;
+		echo json_encode($r);
+	}
+	public function getDiagrama1(){
+		$id = $this->input->get('idRequisito');
+		//$sql = $this->db->where('idRequisito',$id)->get('requerimientos');
+		$sql = $this->db->where('idRequisito',1006)->get('requerimientos');
+
+		$r['response'] = 2;
+		if($sql->num_rows()==0){
+			$r['file'] = null;
+		}else{
+
+			$r['file'] = base64_encode($sql->result()[0]->diagrama1);
+		}
 		echo json_encode($r);
 	}
 }

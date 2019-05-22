@@ -2,48 +2,106 @@
 </div>
 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
     <li class="nav-item">
-        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Requisitos</a>
+        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#requisitos" role="tab" aria-controls="pills-home" aria-selected="true">Requisitos</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Añadir</a>
     </li>
 </ul>
 <div class="tab-content" id="pills-tabContent">
-    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-        <table class="table table-striped table-hover table-responsive" id="tablaRequisitos">
-            <thead class="thead-dark">
-                <tr id="trClone2">
-                    <th>ID</th>
-                    <th>Creacion</th>
-                    <th>Nombre </th>
-                    <th>Descripcion</th>
-                    <th>Documentos</th>
-                    <th >Acciones</th>
-                </tr>
-            </thead>
-            <tbody>  
-                <tr id="trClone">
-                    <th scope="row"  id="idRequisito"></th>
-                    <td id="Creacion"></td>
-                    <td id="Nombre"></td>
-                    <td id="Descripcion"></td>
-                    <td>Documentos</td>
-                    <td class="d-inline-flex d-none">
-                        <button type="button" id="editarRequisito" class="btn btn-warning mr-3" value=''>
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <!--<?php if ($level==0 || $level==4): ?>
-                            <button type="button" id="borrarUsuario" class="btn btn-danger" value=''>
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        <?php endif ?>-->
-                        <a href="#" id="proyectoRequerimientos" target="_blank" class="btn btn-primary" value=''>
-                        <i class="fas fa-tasks"></i>
-                        </a>
-                    </td>
-                </tr> 
-            </tbody>
-        </table>
+    <div class="tab-pane fade show active" id="requisitos" role="tabpanel">
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#reqFuncionales" role="tab" aria-controls="pills-home" aria-selected="true">Funcionales</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#reqNoFuncionales" role="tab" aria-controls="pills-profile" aria-selected="false">No Funcionales</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#reqRestriccion" role="tab" aria-controls="pills-contact" aria-selected="false">Restriccion</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="reqFuncionales" role="tabpanel" aria-labelledby="pills-home-tab">
+                <table class="table table-striped table-hover table-responsive" id="tablaRequisitos">
+                    <thead class="thead-dark">
+                        <tr id="trClone2">
+                            <th>ID</th>
+                            <th>Creacion</th>
+                            <th>Descripcion</th>
+                            <th>Interfaz</th>
+                            <th>Dependencia</th>
+                            <th>Version</th>
+                            <th>Estado</th>
+                            <th>Documentos</th>
+                            <th >Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>  
+                        <tr id="trClone">
+                            <th scope="row"  id="idRequisito"></th>
+                            <td id="Creacion"></td>
+                            <td id="Descripcion"></td>
+                            <td id="interfaz"></td>
+                            <td id="dependencia"></td>
+                            <td id="version"></td>
+                            <td id="estado"></td>
+                            <td id="documentos">
+                                <button type="button" value =""class="btn btn-danger btn-sm" id="diagrama1">
+                                    Diagrama 1
+                                    <i class="far fa-file-pdf ml-2"></i>
+                                </button>
+                            </td>
+                            <td class="d-inline-flex d-none">
+                                <button type="button" id="editarRequisito" class="btn btn-warning btn-sm" value=''>
+                                    Edit
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <!--<?php if ($level==0 || $level==4): ?>
+                                    <button type="button" id="borrarUsuario" class="btn btn-danger" value=''>
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                <?php endif ?>-->
+                                <a href="#" id="proyectoRequerimientos" target="_blank" class="btn btn-primary btn-sm" value=''>
+                                Versiones
+                                </a>
+                            </td>
+                        </tr> 
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="reqNoFuncionales" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <table class="table table-striped table-hover table-responsive" id="tablaRequisitosNoFuncionales">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Creacion</th>
+                            <th>Descripcion</th>
+                            <th >Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>  
+                        <tr id="trCloneNoFuncionales">
+                            <th scope="row"  id="idRequisito"></th>
+                            <td id="Creacion"></td>
+                            <td id="Descripcion"></td>
+                            <td class="d-inline-flex d-none">
+                                <button type="button" id="editarRequisito" class="btn btn-warning btn-sm" value=''>
+                                    Edit
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <!--<?php if ($level==0 || $level==4): ?>
+                                    <button type="button" id="borrarUsuario" class="btn btn-danger" value=''>
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                <?php endif ?>-->
+                            </td>
+                        </tr> 
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="reqRestriccion" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
+        </div>
     </div>
     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
         <form class="form-group" id="addRequisito"addPackageInstrument>
@@ -55,7 +113,7 @@
                 </fieldset>		
                 <fieldset class="form-group col-sm-2">
                     <label>Version</label>
-                    <input type="number" class="form-control" name="versionReq" id="versionReq" placeholder="Number" >
+                    <input type="text" class="form-control" name="versionReq" id="versionReq" placeholder="Number" >
                 </fieldset>	
                 <fieldset class="form-group m-0 col-sm-2">
                     <label>Tipo</label>
@@ -63,7 +121,7 @@
                         <option value="">--Selecciona el tipo--</option>
                         <option value="funcional">Funcional</option>
                         <option value="noFuncional">No Funcional</option>
-                        <option value="Restriccion">Restriccion</option>
+                        <option value="restriccion">Restriccion</option>
                     </select>
                 </fieldset>
             </div>
@@ -74,7 +132,7 @@
                 </fieldset>	
                 <fieldset class="form-group col-sm-2">
                     <label>Dependencia</label>
-                    <textarea type="text" class="form-control" name="dependenciaReq" id="dependenciaReq" placeholder="Escribe los requisitos de los que depende" required></textarea>
+                    <textarea type="text" class="form-control" name="dependenciaReq" id="dependenciaReq" placeholder="Escribe los requisitos de los que depende" ></textarea>
                 </fieldset>
                 <fieldset class="form-group col-sm-2">
                     <label>Interfaz</label>
@@ -95,7 +153,7 @@
                 </fieldset>
                 <fieldset class="form-group m-0 col-sm-2">
                     <label>Prioridad Para el desarrollo</label>
-                    <select id="prioridadReq" name="prioridadReq" class="form-control" required>
+                    <select id="prioridadReq" name="prioridadReq" class="form-control">
                         <option value="">--Selecciona--</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -119,33 +177,35 @@
         </form>
     </div>
 </div>
-<button type="hidden" hidden data-toggle="modal" data-target=".bd-example-modal-lg" id="btn-open-modal-cv"></button>
+<button type="hidden" hidden data-toggle="modal" data-target=".bd-example-modal-lg" id="abrirModalDiagrama1"></button>
 <!-- Modal para ver el archivo pdf de la hoja de vida usuario -->
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content p-2">
-      <h2>Hoja de vida</h2>
+      <h2>Diagrama1</h2>
       <iframe src="" id="iframe-pdf" class="mb-2" style="display:none;width:100%;height:400pt;" frameborder="0"></iframe>
-      <form class="d-inline-block mt-4" id="form-file-cv">
-        <input type="hidden" id="idTeacher">
+      <form class="d-inline-block mt-4" id="formDiagrama1">
+        <input type="hidden" id="idRequisito">
         <div class="d-flex mb-2">
-          <input type="file" name="file" id="file-cv" class="file-cv" accept="application/pdf" required>
-          <label for="file-cv" class="label-cv">
+          <input type="file" name="file" id="file-cv" class="" accept="application/pdf" required>
+          <!--<label for="file-cv" class="">
             <span class="one-file">1 archivo</span>
             <i class="fas fa-file-upload mr-1"></i>
             Seleccionar archivo
-          </label>
+          </label>-->
           <button type="submit" class="btn btn-success rounded-0">
             <i class="fas fa-save mr-1"></i> Guardar 
           </button>
+          <!--
           <button type="button" class="ml-1 btn btn-danger rounded-0" id="clearInputFileCv">
             <i class="fas fa-eraser mr-1"></i> Limpiar
-          </button>
+          </button>-->
         </div>
-        <div class="progress-bard-file" id="progress" style="display: none;"></div>
+        <!-- <div class="progress-bard-file" id="progress" style="display: none;"></div>
 <!--         <span class="num-files" id="file-cv-info">
           nombre del archivo
         </span> -->
+        <div id="msg-cv" class="alert" style="display: none;"></div>
       </form>
     </div>
   </div>

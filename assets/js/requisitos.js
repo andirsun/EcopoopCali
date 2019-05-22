@@ -15,7 +15,8 @@ $(function () {
     console.log("Id del proyecto,",idProyecto);
 	addRequisito();
 	//añadirRequisitoAProyecto();
-	getRequisitos();
+	getRequisitosFuncionales();
+	getRequisitosNoFuncionales();
 	setTitulo();
 	subirArchivo1();
 	verArchivo1();
@@ -109,10 +110,10 @@ function setTitulo(){
 		}
 	});
 }
-function getRequisitos(){
+function getRequisitosFuncionales(){
 	var idProyecto = 1;
 	$.ajax({
-		url: base_url+'admin_ajax/getRequisitos',
+		url: base_url+'admin_ajax/getRequisitosFuncionales',
 		type: 'GET',
 		dataType: 'json',
 		data:{idproyectoo:idProyecto
@@ -122,7 +123,7 @@ function getRequisitos(){
 		success:function(r){
 			console.log('list Requisitos \n', r);
 			var tableBody = $('#tablaRequisitos').find("tbody");
-			var str = construirTablaRequisito(r.content);
+			var str = buildRequisitos(r.content);
 			$(tableBody).html(str);
 			table = $("#tablaRequisitos").DataTable(dataTableOptions);
 			// console.log(table);
@@ -132,16 +133,41 @@ function getRequisitos(){
 		}
 	});
 }
+function getRequisitosNoFuncionales(){
+	var idProyecto = 1;
+	$.ajax({
+		url: base_url+'admin_ajax/getRequisitosNoFuncionales',
+		type: 'GET',
+		dataType: 'json',
+		data:{idproyectoo:idProyecto
+		},
+		beforeSend:function(){
+		},
+		success:function(r){
+			console.log('list Requisitos \n', r);
+			var tableBody = $('#tablaRequisitosNoFuncionales').find("tbody");
+			var str = construirTablaRequisitosNoFuncionales(r.content);
+			$(tableBody).html(str);
+			table = $("#tablaRequisitosNoFuncionales").DataTable(dataTableOptions);
+			// console.log(table);
+		},
+		error:function(xhr, status, msg){
+			console.log(xhr.responseText);
+		}
+	});
+}
 function subirArchivo1() {
-	$("#form-file-cv").submit(function(event) {
+	$("#formDiagrama1").submit(function(event) {
 		event.preventDefault();
 		var form = this;
 		var formData = new FormData();
-		formData.append('idMaster', '176');
+		formData.append('idRequisito', $(form).find('#idRequisito').attr('value'));
 		formData.append('file', $(form).find('input[type=file]').prop('files')[0]);
+		var classCss = '';
+		var textMsgResponse = '';
 		console.log(formData);
 		$.ajax({
-			url: base_url+'admin_ajax/sendHojaVideMaestro',
+			url: base_url+'admin_ajax/enviarDiagrama1',
 			type: 'POST',
 			dataType: 'json',
 			data: formData,
@@ -152,53 +178,76 @@ function subirArchivo1() {
 				$(form).find('input').prop('disabled', true);
 				$(form).find('button').prop('disabled', true);
 			},
-     	xhr: function() {
-        var myXhr = $.ajaxSettings.xhr();
-        $(form).find("#progress").fadeIn('slow');
-        if(myXhr.upload){
-            myXhr.upload.addEventListener('progress',function(e){
-					    if(e.lengthComputable){
-					        var max = e.total;
-					        var current = e.loaded;
-					        var Percentage = (current * 100)/max;
-					        $(form).find("#progress").css('width', Percentage+'%');
-					        $(form).find("#progress").text((Percentage).toFixed(2)+'% completado');
-					    }  
-					 }, false);
-        }
-        return myXhr;
-      },
+			/*
+			xhr: function() {
+			var myXhr = $.ajaxSettings.xhr();
+			//$(form).find("#progress").fadeIn('slow');
+			if(myXhr.upload){
+				myXhr.upload.addEventListener('progress',function(e){
+							if(e.lengthComputable){
+								var max = e.total;
+								var current = e.loaded;
+								var Percentage = (current * 100)/max;
+								$(form).find("#progress").css('width', Percentage+'%');
+								$(form).find("#progress").text((Percentage).toFixed(2)+'% completado');
+							}  
+						}, false);
+			}
+			return myXhr;
+			
+			},
+			*/
 			success: function(r) {
 				console.log(r);
+				if(r.response == 2) {
+					classCss = 'alert-success';
+					textMsgResponse = 'Guardado correctamente, para verlo por favor cierra y vuelve abrilo';
+				} else {
+					classCss = 'alert-danger';
+					textMsgResponse = 'Ups!, No se pudo guardar :(';
+				}
 			},
 			error: function(xhr, status, msg) {
 				console.log(xhr.responseText);
+				classCss = 'alert-danger';
+				textMsgResponse = 'Ups!, ocurrio un error no se pudo guardar :(';
 			},
 			complete: function() {
-				setTimeout(function() {
-					$(form).find('input').prop('disabled', false);
-					$(form).find('button').prop('disabled', false);
-					$(form).find("#progress").fadeOut('fast', function() {
-						$(form).find("#progress").text('');
-						$(form).find("#progress").removeAttr('style');
-						$(form).find("#progress").fadeOut('fast');
-					});
-				}, 1500);
+				$(form)[0].reset();
+				$(form).find('input').prop('disabled', false);
+				$(form).find('button').prop('disabled', false);
+				/*
+				$(form).find("#progress").fadeOut('fast', function() {
+					$(form).find("#progress").text('');
+					$(form).find("#progress").removeAttr('style');
+					$(form).find("#progress").fadeOut('fast');
+				});
+				*/
+				$("#msg-cv").addClass(classCss);
+				$("#msg-cv").text(textMsgResponse);
+				$("#msg-cv").fadeIn('fast', function() {
+					setTimeout(function() {
+						$("#msg-cv").fadeOut('fast', function() {
+							$("#msg-cv").removeClass(classCss);
+							$("#msg-cv").text('');
+						});
+					}, 5000);
+				});
 			}
 		});
 	});
 }
 function verArchivo1() {
-	$("body").on('click', 'button#btn-modal-cv', function(evt) {
+	$("body").on('click', 'button#diagrama1', function(evt) {
 		var btn = this;
 		var btnContent = $(btn).html();
-		var idTeacher = $(btn).attr('value');
-		$("#form-file-cv #idTeacher").attr('value', idTeacher);
+		var idRequisito = $(btn).attr('value');
+		$("#formDiagrama1 #idRequisito").attr('value', idRequisito);
 		$.ajax({
-			url: base_url+'admin_ajax/getHojaVidaMaestro',
+			url: base_url+'admin_ajax/getDiagrama1',
 			type: 'GET',
 			dataType: 'json',
-			data: { idMaster: idTeacher },
+			data: { idRequisito: idRequisito },
 			beforeSend: function() {
 				var loader = '<i class="fa fa-spin fa-spinner"></i>';
 				$(btn).html(loader);
@@ -216,7 +265,7 @@ function verArchivo1() {
 					} else {
 						$("#iframe-pdf").fadeOut(0);
 					}
-					$("#btn-open-modal-cv").trigger('click');
+					$("#abrirModalDiagrama1").trigger('click');//esto abre el modal
 				}
 			},
 			error: function(xhr, status, msg) {
@@ -229,16 +278,41 @@ function verArchivo1() {
 		});
 	});
 }
-function construirTablaRequisito(listProyect) {
+function buildRequisitos(listaRequisitos) {
 	var str = '';
-	$.each(listProyect,function(index, el){
+	$.each(listaRequisitos,function(index, el){
 		var tr = $(trClone).clone();
-		$(tr).attr('data-id', el.id);
-		$(tr).find('#idRequisito').text(el.idProyecto);
-		$(tr).find('#Nombre').text(el.nombre);
+		$(tr).attr('data-id', el.reqId);
+		$(tr).find('#idRequisito').text(el.reqId);
+		//$(tr).find('#Nombre').text(el.nombre);
 		$(tr).find('#Creacion').text(el.agregado);
 		$(tr).find('#Descripcion').text(el.descripcion);
+		$(tr).find('#interfaz').text(el.interfaz);
+		$(tr).find('#dependencia').text(el.dependencia);
+		$(tr).find('#version').text(el.version);
+		$(tr).find('#estado').text(el.estado);
 		$(tr).find('#editarRequisito').attr('value', el.id);
+		$(tr).find('#diagrama1').attr('value',el.idRequisito);
+		//$(tr).find('#borrarUsuario').attr('value', el.id);
+		//$(tr).find("#proyectoRequerimientos").attr('href', base_url+'admin/nav/requisitosProyect/'+el.id);
+		//$(tr).find("#proyectoRequerimientos").attr('value', el.id);
+		str += $(tr).prop('outerHTML');
+	});
+	return str;
+}
+function construirTablaRequisitosNoFuncionales(listaRequisitos) {
+	var str = '';
+	$.each(listaRequisitos,function(index, el){
+		var tr = $(trCloneNoFuncionales).clone();
+		$(tr).attr('data-id', el.idRequisito);
+		$(tr).find('#idRequisito').text(el.idRequisito);
+		//$(tr).find('#Nombre').text(el.nombre);
+		$(tr).find('#Descripcion').text(el.descripcion);
+		$(tr).find('#Creacion').text(el.agregado);
+		$(tr).find('#version').text(el.version);
+		$(tr).find('#estado').text(el.estado);
+		$(tr).find('#editarRequisito').attr('value', el.id);
+		//$(tr).find('#diagrama1').attr('value',el.idRequisito);
 		//$(tr).find('#borrarUsuario').attr('value', el.id);
 		//$(tr).find("#proyectoRequerimientos").attr('href', base_url+'admin/nav/requisitosProyect/'+el.id);
 		//$(tr).find("#proyectoRequerimientos").attr('value', el.id);

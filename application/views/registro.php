@@ -20,18 +20,18 @@
             <div class="container">
                 <div class="signup-content">
                     <form id="formRegistrar" class="signup-form">
-                        <h2 class="form-title"> Crear una cuenta</h2>
+                        <h2 class="form-title"> Agregar un Nuevo Usuario</h2>
                         <div class="form-group">
-                            <input type="text" class="form-input" name="name" id="name" placeholder="Tu Nombre" required/>
+                            <input type="text" class="form-input" name="name" id="name" placeholder="Nombre" required/>
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-input" name="email" id="email" placeholder="Tu Correo" requiered/>
+                            <input type="email" class="form-input" name="email" id="email" placeholder="Correo" requiered/>
                         </div>
                         <div class="form-group">
                             <input type="password" class="form-input" name="pass" id="pass" placeholder="Contraseña" requiered/>
                         </div>
-                        <select class="form-control mb-4" id="proyect">
-                            <option>--Seleccione Proyecto--</option>
+                        <!--<select class="form-control mb-4" id="proyect">
+                            <option>--Seleccione Proyecto--</option>-->
                             
                         </select>
                         <div class="form-group">
