@@ -42,10 +42,14 @@
                             <th scope="row"  id="idRequisito"></th>
                             <td id="Creacion"></td>
                             <td id="Descripcion"></td>
-                            <td id="interfaz"></td>
+                            <td id="interfaz">
+                                <i id="interfazIcon" class="fas fa-edit"></i></td>
                             <td id="dependencia"></td>
                             <td id="version"></td>
-                            <td id="estado"></td>
+                            <td id="estado">
+                                <button type="button" value =""class="btn btn-danger btn-sm" id="btnEstado">
+                                </button>
+                            </td>
                             <td id="documentos">
                                 <button type="button" value =""class="btn btn-danger btn-sm" id="diagrama1">
                                     Diagrama 1
@@ -54,7 +58,7 @@
                             </td>
                             <td class="d-inline-flex d-none">
                                 <button type="button" id="editarRequisito" class="btn btn-warning btn-sm" value=''>
-                                    Edit
+                                    Editar
                                     <i class="fas fa-edit"></i>
                                 </button>
                                 <!--<?php if ($level==0 || $level==4): ?>
@@ -77,6 +81,7 @@
                             <th>ID</th>
                             <th>Creacion</th>
                             <th>Descripcion</th>
+                            <th>Estado</th>
                             <th >Acciones</th>
                         </tr>
                     </thead>
@@ -85,9 +90,13 @@
                             <th scope="row"  id="idRequisito"></th>
                             <td id="Creacion"></td>
                             <td id="Descripcion"></td>
+                            <td id="estado">
+                                <button type="button" value =""class="btn btn-danger btn-sm" id="btnEstado">
+                                </button>
+                            </td>
                             <td class="d-inline-flex d-none">
                                 <button type="button" id="editarRequisito" class="btn btn-warning btn-sm" value=''>
-                                    Edit
+                                    Editar
                                     <i class="fas fa-edit"></i>
                                 </button>
                                 <!--<?php if ($level==0 || $level==4): ?>
@@ -100,7 +109,41 @@
                     </tbody>
                 </table>
             </div>
-            <div class="tab-pane fade" id="reqRestriccion" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
+            <div class="tab-pane fade" id="reqRestriccion" role="tabpanel" aria-labelledby="pills-contact-tab">
+                <table class="table table-striped table-hover table-responsive" id="tablaRequisitosRestriccion">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Creacion</th>
+                            <th>Descripcion</th>
+                            <th>Estado</th>
+                            <th >Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>  
+                        <tr id="trCloneRestriccion">
+                            <th scope="row"  id="idRequisito"></th>
+                            <td id="Creacion"></td>
+                            <td id="Descripcion"></td>
+                            <td id="estado">
+                                <button type="button" value =""class="btn btn-danger btn-sm" id="btnEstado">
+                                </button>
+                            </td>
+                            <td class="d-inline-flex d-none">
+                                <button type="button" id="editarRequisito" class="btn btn-warning btn-sm" value=''>
+                                    Editar
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <!--<?php if ($level==0 || $level==4): ?>
+                                    <button type="button" id="borrarUsuario" class="btn btn-danger" value=''>
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                <?php endif ?>-->
+                            </td>
+                        </tr> 
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">

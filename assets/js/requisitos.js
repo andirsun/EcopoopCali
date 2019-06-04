@@ -1,4 +1,4 @@
-var idProyect =idProyecto; 
+idProyect =idProyecto; 
 var dataTableOptions = {
 	'language': {
 		'search': 'Busqueda:',
@@ -17,6 +17,7 @@ $(function () {
 	//añadirRequisitoAProyecto();
 	getRequisitosFuncionales();
 	getRequisitosNoFuncionales();
+	getRequisitosRestriccion();
 	setTitulo();
 	subirArchivo1();
 	verArchivo1();
@@ -111,17 +112,18 @@ function setTitulo(){
 	});
 }
 function getRequisitosFuncionales(){
-	var idProyecto = 1;
+	var datos = {
+		id: idProyect
+	};
 	$.ajax({
 		url: base_url+'admin_ajax/getRequisitosFuncionales',
 		type: 'GET',
 		dataType: 'json',
-		data:{idproyectoo:idProyecto
-		},
+		data:datos,
 		beforeSend:function(){
 		},
 		success:function(r){
-			console.log('list Requisitos \n', r);
+			console.log('list Requisitos Funcionales \n', r);
 			var tableBody = $('#tablaRequisitos').find("tbody");
 			var str = buildRequisitos(r.content);
 			$(tableBody).html(str);
@@ -134,21 +136,46 @@ function getRequisitosFuncionales(){
 	});
 }
 function getRequisitosNoFuncionales(){
-	var idProyecto = 1;
+	var datos = {
+		id: idProyect
+	};
 	$.ajax({
 		url: base_url+'admin_ajax/getRequisitosNoFuncionales',
 		type: 'GET',
 		dataType: 'json',
-		data:{idproyectoo:idProyecto
-		},
+		data:datos,
 		beforeSend:function(){
 		},
 		success:function(r){
-			console.log('list Requisitos \n', r);
+			console.log('list Requisitos No Funcionales \n', r);
 			var tableBody = $('#tablaRequisitosNoFuncionales').find("tbody");
 			var str = construirTablaRequisitosNoFuncionales(r.content);
 			$(tableBody).html(str);
 			table = $("#tablaRequisitosNoFuncionales").DataTable(dataTableOptions);
+			// console.log(table);
+		},
+		error:function(xhr, status, msg){
+			console.log(xhr.responseText);
+		}
+	});
+}
+function getRequisitosRestriccion(){
+	var datos = {
+		id: idProyect
+	};
+	$.ajax({
+		url: base_url+'admin_ajax/getRequisitosRestriccion',
+		type: 'GET',
+		dataType: 'json',
+		data:datos,
+		beforeSend:function(){
+		},
+		success:function(r){
+			console.log('list Requisitos  Restriccion \n', r);
+			var tableBody = $('#tablaRequisitosRestriccion').find("tbody");
+			var str = construirTablaRequisitosRestriccion(r.content);
+			$(tableBody).html(str);
+			table = $("#tablaRequisitosRestriccion").DataTable(dataTableOptions);
 			// console.log(table);
 		},
 		error:function(xhr, status, msg){
@@ -282,15 +309,32 @@ function buildRequisitos(listaRequisitos) {
 	var str = '';
 	$.each(listaRequisitos,function(index, el){
 		var tr = $(trClone).clone();
+		if (el.estado == 0){
+			$(tr).find('#btnEstado').attr('value',"aceptado");
+			$(tr).find('#btnEstado').text("Aceptado");
+			$(tr).find('#btnEstado').attr('class',"btn btn-success btn-sm");	
+		}
+		else{
+			$(tr).find('#btnEstado').attr('value',"conflicto");
+			$(tr).find('#btnEstado').text("Conflicto");
+			$(tr).find('#btnEstado').attr('class',"btn btn-danger btn-sm");
+		}
+		if (el.interfaz == "Si"){
+			$(tr).find('#interfazIcon').attr('class',"fas fa-check");
+		}
+		else{
+			$(tr).find('#interfazIcon').attr('class',"fas fa-times");
+			
+		}
 		$(tr).attr('data-id', el.reqId);
 		$(tr).find('#idRequisito').text(el.reqId);
 		//$(tr).find('#Nombre').text(el.nombre);
 		$(tr).find('#Creacion').text(el.agregado);
 		$(tr).find('#Descripcion').text(el.descripcion);
-		$(tr).find('#interfaz').text(el.interfaz);
+		//$(tr).find('#interfaz').text(el.interfaz);
 		$(tr).find('#dependencia').text(el.dependencia);
 		$(tr).find('#version').text(el.version);
-		$(tr).find('#estado').text(el.estado);
+		//$(tr).find('#estado').text(el.estado);
 		$(tr).find('#editarRequisito').attr('value', el.id);
 		$(tr).find('#diagrama1').attr('value',el.idRequisito);
 		//$(tr).find('#borrarUsuario').attr('value', el.id);
@@ -304,13 +348,56 @@ function construirTablaRequisitosNoFuncionales(listaRequisitos) {
 	var str = '';
 	$.each(listaRequisitos,function(index, el){
 		var tr = $(trCloneNoFuncionales).clone();
+		if (el.estado == 0){
+			$(tr).find('#btnEstado').attr('value',"aceptado");
+			$(tr).find('#btnEstado').text("Aceptado");
+			$(tr).find('#btnEstado').attr('class',"btn btn-success btn-sm");
+			
+		}
+		else{
+			$(tr).find('#btnEstado').attr('value',"conflicto");
+			$(tr).find('#btnEstado').text("Conflicto");
+			$(tr).find('#btnEstado').attr('class',"btn btn-danger btn-sm");
+		}
 		$(tr).attr('data-id', el.idRequisito);
 		$(tr).find('#idRequisito').text(el.idRequisito);
 		//$(tr).find('#Nombre').text(el.nombre);
 		$(tr).find('#Descripcion').text(el.descripcion);
 		$(tr).find('#Creacion').text(el.agregado);
 		$(tr).find('#version').text(el.version);
-		$(tr).find('#estado').text(el.estado);
+		//$(tr).find('#estado').text(el.estado);
+		$(tr).find('#editarRequisito').attr('value', el.id);
+		//$(tr).find('#diagrama1').attr('value',el.idRequisito);
+		//$(tr).find('#borrarUsuario').attr('value', el.id);
+		//$(tr).find("#proyectoRequerimientos").attr('href', base_url+'admin/nav/requisitosProyect/'+el.id);
+		//$(tr).find("#proyectoRequerimientos").attr('value', el.id);
+		str += $(tr).prop('outerHTML');
+	});
+	return str;
+}
+function construirTablaRequisitosRestriccion(listaRequisitos) {
+	var str = '';
+	$.each(listaRequisitos,function(index, el){
+		var tr = $(trCloneRestriccion).clone();
+		if (el.estado == 0){
+			$(tr).find('#btnEstado').attr('value',"aceptado");
+			$(tr).find('#btnEstado').text("Aceptado");
+			$(tr).find('#btnEstado').attr('class',"btn btn-success btn-sm");
+			
+		}
+		else{
+			$(tr).find('#btnEstado').attr('value',"conflicto");
+			$(tr).find('#btnEstado').text("Conflicto");
+			$(tr).find('#btnEstado').attr('class',"btn btn-danger btn-sm");
+		}
+		
+		$(tr).attr('data-id', el.idRequisito);
+		$(tr).find('#idRequisito').text(el.idRequisito);
+		//$(tr).find('#Nombre').text(el.nombre);
+		$(tr).find('#Descripcion').text(el.descripcion);
+		$(tr).find('#Creacion').text(el.agregado);
+		$(tr).find('#version').text(el.version);
+		//$(tr).find('#estado').text(el.estado);
 		$(tr).find('#editarRequisito').attr('value', el.id);
 		//$(tr).find('#diagrama1').attr('value',el.idRequisito);
 		//$(tr).find('#borrarUsuario').attr('value', el.id);

@@ -127,18 +127,28 @@ class Admin_ajax extends CI_Controller {
 		$r['content'] = $sql->result();
 		echo json_encode($r);
 	}
-	public function getRequisitosFuncionales(){ //Para llenar la tabla de los usuarios
-		$idProyecto=$this->input->get('idProyecto');
-		$sql = $this->db->select('requerimientos.idRequisito reqId,agregado,descripcion,version,interfaz,dependencia,estado,requisitosxProyecto.*')->where('idProyecto',1)->where('tipo',"funcional")->join('requerimientos','requerimientos.id = requisitosxProyecto.idRequisito')->get('requisitosxProyecto');
+	public function getRequisitosFuncionales(){ //Para llenar la tabla de losRequisitos 
+		$idProyecto=$this->input->get('id');
+		$sql = $this->db->select('requerimientos.idRequisito reqId,agregado,descripcion,version,interfaz,dependencia,estado,requisitosxProyecto.*')->where('idProyecto',$idProyecto)->where('tipo',"funcional")->join('requerimientos','requerimientos.id = requisitosxProyecto.idRequisito')->get('requisitosxProyecto');
 		$r['response'] = 2;
 		$r['content'] = $sql->result();
+		$r['idRequisito'] = $idProyecto;
 		echo json_encode($r);
 	}
-	public function getRequisitosNoFuncionales(){ //Para llenar la tabla de los usuarios
-		$idProyecto=$this->input->get('idProyecto');
-		$sql = $this->db->select('requerimientos.*,requisitosxProyecto.*')->where('idProyecto',1)->where('tipo',"Nofuncional")->join('requerimientos','requerimientos.id = requisitosxProyecto.idRequisito')->get('requisitosxProyecto');
+	public function getRequisitosNoFuncionales(){ //Para llenar la tabla de los Requisitos
+		$idProyecto=$this->input->get('id');
+		$sql = $this->db->select('requerimientos.*,requisitosxProyecto.*')->where('idProyecto',$idProyecto)->where('tipo',"Nofuncional")->join('requerimientos','requerimientos.id = requisitosxProyecto.idRequisito')->get('requisitosxProyecto');
 		$r['response'] = 2;
 		$r['content'] = $sql->result();
+		$r['idRequisito'] = $idProyecto;
+		echo json_encode($r);
+	}
+	public function getRequisitosRestriccion(){ //Para llenar la tabla de los Requisitos
+		$idProyecto=$this->input->get('id');
+		$sql = $this->db->select('requerimientos.*,requisitosxProyecto.*')->where('idProyecto',$idProyecto)->where('tipo',"restriccion")->join('requerimientos','requerimientos.id = requisitosxProyecto.idRequisito')->get('requisitosxProyecto');
+		$r['response'] = 2;
+		$r['content'] = $sql->result();
+		$r['idRequisito'] = $idProyecto;
 		echo json_encode($r);
 	}
 	public function getSucursales(){
