@@ -288,7 +288,7 @@ class Admin_ajax extends CI_Controller {
 			'diagrama1' => $file
 		);
 		
-		$this->db->where('id',15)->update('requerimientos',$a);
+		$this->db->where('id',$id)->update('requerimientos',$a);
 		//if($check){
 			//$this->db->where('id',$idGlobal)->update('requerimientos',$a);
 		//}
@@ -299,20 +299,22 @@ class Admin_ajax extends CI_Controller {
 		//}
 		$r['response'] = 2;
 		$r['content'] = 'saved';
-		$r['idRequisito'] = $idGlobal;
+		$r['idRequisito'] = $id;
 		echo json_encode($r);
 	}
 	public function getDiagrama1(){
 		$id = $this->input->get('idRequisito');
 		//$sql = $this->db->where('idRequisito',$id)->get('requerimientos');
-		$sql = $this->db->where('idRequisito',1006)->get('requerimientos');
+		$sql = $this->db->where('id',$id)->get('requerimientos');
 
 		$r['response'] = 2;
 		if($sql->num_rows()==0){
 			$r['file'] = null;
+			$r['id'] = $id;
 		}else{
 
 			$r['file'] = base64_encode($sql->result()[0]->diagrama1);
+			$r['id'] = $id;
 		}
 		echo json_encode($r);
 	}
