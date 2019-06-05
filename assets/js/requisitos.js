@@ -12,13 +12,15 @@ var dataTableOptions = {
 	},
 };
 $(function () {
-    console.log("Id del proyecto,",idProyecto);
 	addRequisito();
 	//añadirRequisitoAProyecto();
+	editarRequisitoFuncional();
 	getRequisitosFuncionales();
 	getRequisitosNoFuncionales();
 	getRequisitosRestriccion();
+	eliminarRequisito();
 	setTitulo();
+	cargarDatos();
 	subirArchivo1();
 	verArchivo1();
     
@@ -43,6 +45,72 @@ function base64toBlob(base64Data, contentType) {
 	}
 	return new Blob(byteArrays, { type: contentType });	
   }
+
+function editarRequisitoFuncional(){
+	$("body").on("click"," #editarRequisitoFuncional",function(event){
+		idseleccion=$(this).attr("value");
+		$("#dataHead").attr('value',idseleccion);
+		
+		$("#triggerModal").trigger('click');
+	
+	});
+}
+function eliminarRequisito(){
+	$("body").on("click","#tablaRequisitos #borrarReqFuncional",function(event){
+		event.preventDefault();
+		idseleccion=$(this).attr("value");
+		$.ajax({
+			url: base_url + 'admin_ajax/borrarRequisitoFuncional',
+			type: 'GET',
+			dataType: 'json',
+			data:{id:idseleccion},
+			beforeSend: function () {
+			},
+			success: function (r) {
+				console.log(r);
+				getRequisitosFuncionales();
+				//$("#editIdRequisito").attr('placeholder',idseleccion);
+				
+		
+			},
+			error: function (xhr, status, msg) {
+				console.log(xhr.responseText);
+			}
+		});
+		
+		
+		
+	
+	});
+
+}
+function cargarDatos(){
+	$("#cargarDatos").on("click",function(event){
+		event.preventDefault();
+		idseleccion=$("#dataHead").attr("value");
+		$.ajax({
+			url: base_url + 'admin_ajax/editarRequisitosFuncionales',
+			type: 'GET',
+			dataType: 'json',
+			data:{id:idseleccion},
+			beforeSend: function () {
+			},
+			success: function (r) {
+				console.log("dasdasdas")
+				//$("#editIdRequisito").attr('placeholder',idseleccion);
+				
+		
+			},
+			error: function (xhr, status, msg) {
+				console.log(xhr.responseText);
+			}
+		});
+		
+	
+	});
+	
+
+}
 function addRequisito(){
     $('#addRequisito').submit(function(e){  
         e.preventDefault();
@@ -59,6 +127,9 @@ function addRequisito(){
             success: function (r) {
 				var idRequisito= r.content;
 				añadirRequisitoAProyecto(idRequisito,idProyecto);
+				getRequisitosFuncionales();
+				getRequisitosFuncionales();
+				getRequisitosRestriccion();
 
             	
             },
@@ -121,6 +192,7 @@ function getRequisitosFuncionales(){
 		dataType: 'json',
 		data:datos,
 		beforeSend:function(){
+			$("#tablaRequisitos").dataTable().fnDestroy();
 		},
 		success:function(r){
 			console.log('list Requisitos Funcionales \n', r);
@@ -145,6 +217,7 @@ function getRequisitosNoFuncionales(){
 		dataType: 'json',
 		data:datos,
 		beforeSend:function(){
+			$("#tablaRequisitosNoFuncionales").dataTable().fnDestroy();
 		},
 		success:function(r){
 			console.log('list Requisitos No Funcionales \n', r);
@@ -169,6 +242,7 @@ function getRequisitosRestriccion(){
 		dataType: 'json',
 		data:datos,
 		beforeSend:function(){
+			$("#tablaRequisitosRestriccion").dataTable().fnDestroy();
 		},
 		success:function(r){
 			console.log('list Requisitos  Restriccion \n', r);
@@ -308,7 +382,7 @@ function verArchivo1() {
 function buildRequisitos(listaRequisitos) {
 	var str = '';
 	$.each(listaRequisitos,function(index, el){
-		var tr = $(trClone).clone();
+		var tr = $("#trClone").clone();
 		if (el.estado == 0){
 			$(tr).find('#btnEstado').attr('value',"aceptado");
 			$(tr).find('#btnEstado').text("Aceptado");
@@ -326,7 +400,7 @@ function buildRequisitos(listaRequisitos) {
 			$(tr).find('#interfazIcon').attr('class',"fas fa-times");
 			
 		}
-		$(tr).attr('data-id', el.reqId);
+		//$(tr).attr('data-id', el.idRequisito);
 		$(tr).find('#idRequisito').text(el.reqId);
 		//$(tr).find('#Nombre').text(el.nombre);
 		$(tr).find('#Creacion').text(el.agregado);
@@ -335,10 +409,10 @@ function buildRequisitos(listaRequisitos) {
 		$(tr).find('#dependencia').text(el.dependencia);
 		$(tr).find('#version').text(el.version);
 		//$(tr).find('#estado').text(el.estado);
-		$(tr).find('#editarRequisito').attr('value', el.id);
+		//$(tr).find('#editarRequisitoFuncional').attr('value', el.idRequisito);
 		$(tr).find('#diagrama1').attr('value',el.idRequisito);
-		//$(tr).find('#borrarUsuario').attr('value', el.id);
-		//$(tr).find("#proyectoRequerimientos").attr('href', base_url+'admin/nav/requisitosProyect/'+el.id);
+		$(tr).find('#borrarReqFuncional').attr('value', el.idRequisito);
+		$(tr).find("#editarRequisitoFuncional").attr('href', base_url+'admin/nav/editarReq/'+el.idRequisito);
 		//$(tr).find("#proyectoRequerimientos").attr('value', el.id);
 		str += $(tr).prop('outerHTML');
 	});
@@ -347,7 +421,7 @@ function buildRequisitos(listaRequisitos) {
 function construirTablaRequisitosNoFuncionales(listaRequisitos) {
 	var str = '';
 	$.each(listaRequisitos,function(index, el){
-		var tr = $(trCloneNoFuncionales).clone();
+		var tr = $("#trCloneNoFuncionales").clone();
 		if (el.estado == 0){
 			$(tr).find('#btnEstado').attr('value',"aceptado");
 			$(tr).find('#btnEstado').text("Aceptado");
@@ -366,7 +440,7 @@ function construirTablaRequisitosNoFuncionales(listaRequisitos) {
 		$(tr).find('#Creacion').text(el.agregado);
 		$(tr).find('#version').text(el.version);
 		//$(tr).find('#estado').text(el.estado);
-		$(tr).find('#editarRequisito').attr('value', el.id);
+		$(tr).find('#editarRequisito').attr('value', el.reqId);
 		//$(tr).find('#diagrama1').attr('value',el.idRequisito);
 		//$(tr).find('#borrarUsuario').attr('value', el.id);
 		//$(tr).find("#proyectoRequerimientos").attr('href', base_url+'admin/nav/requisitosProyect/'+el.id);
@@ -378,7 +452,7 @@ function construirTablaRequisitosNoFuncionales(listaRequisitos) {
 function construirTablaRequisitosRestriccion(listaRequisitos) {
 	var str = '';
 	$.each(listaRequisitos,function(index, el){
-		var tr = $(trCloneRestriccion).clone();
+		var tr = $("#trCloneRestriccion").clone();
 		if (el.estado == 0){
 			$(tr).find('#btnEstado').attr('value',"aceptado");
 			$(tr).find('#btnEstado').text("Aceptado");
@@ -398,7 +472,7 @@ function construirTablaRequisitosRestriccion(listaRequisitos) {
 		$(tr).find('#Creacion').text(el.agregado);
 		$(tr).find('#version').text(el.version);
 		//$(tr).find('#estado').text(el.estado);
-		$(tr).find('#editarRequisito').attr('value', el.id);
+		$(tr).find('#editarRequisito').attr('value', el.reqId);
 		//$(tr).find('#diagrama1').attr('value',el.idRequisito);
 		//$(tr).find('#borrarUsuario').attr('value', el.id);
 		//$(tr).find("#proyectoRequerimientos").attr('href', base_url+'admin/nav/requisitosProyect/'+el.id);

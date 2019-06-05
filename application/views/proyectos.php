@@ -19,27 +19,34 @@
                 <td id="Nombre">Nombre </td>
                 <td id="Descripcion">Descripcion</td>
                 <td class="d-inline-flex d-none">
-                    <a href="#" id="contribuidores" target="_blank" class="btn btn-success mr-3 btn-sm" value=''>
+                    <a href="#" id="proyectoContribuidores" target="_blank" class="btn btn-success mr-3 btn-sm" value=''>
                         Contribuidores
                         <i class="fas fa-users"></i>
                     </a>
-                    <button type="button" id="descargarSrs" class="btn btn-danger mr-3 btn-sm" value=''>
+                    
+                    <a href="#" id="proyectoSRS" target="_blank" class="btn btn-danger mr-3 btn-sm" value=''>
                         SRS
                         <i class="fas fa-file-download"></i>
-                    </button>
-                    <button type="button" id="editarProyecto" class="btn btn-warning mr-3 btn-sm" value=''>
+                    </a>
+                    <a href="#" id="editarProyect" target="_blank" class="btn btn-warning mr-3 btn-sm" value=''>
                         Editar Proyecto
                         <i class="fas fa-edit"></i>
-                    </button>
+                    </a>
+                   
                     <!--<?php if ($level==0 || $level==4): ?>
                         <button type="button" id="borrarUsuario" class="btn btn-danger" value=''>
                             <i class="fas fa-trash"></i>
                         </button>
                     <?php endif ?>-->
-                    <a href="#" id="proyectoRequerimientos" target="_blank" class="btn btn-primary btn-sm" value=''>
+                    <a href="#" id="proyectoRequerimientos" target="_blank" class="btn btn-primary btn-sm mr-3" value=''>
                         Requisitos
                         <i class="fas fa-tasks"></i>
                     </a>
+                    
+                    <button type="button" id="borrarProyecto" class="btn btn-danger btn-sm" value=''>
+                            <i class="fas fa-trash"></i>
+                    </button>
+                    
                     </td>
             </tr> 
         </tbody>

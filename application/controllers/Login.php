@@ -18,7 +18,8 @@ class Login extends CI_Controller{
 		if($sql->num_rows()==1){
 			$user = $sql->result()[0]; //con esto accedo a toda la info de la consulta del usuarios 
 			$_SESSION['data_user'] = $user;
-			$_SESSION['nivel'] = $user->nivel;
+			$_SESSION['nombre'] = $user->nombre;
+			$_SESSION['idUsuario'] = $user->idUser;
 			$response = 2;
 		}else{	
 			$response = 1;

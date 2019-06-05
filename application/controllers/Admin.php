@@ -9,13 +9,13 @@ class Admin extends CI_Controller {
 		$this->data = array('view'=>'registro');
 		//$this->sucursal = $_SESSION['sucursal'];
 		
-		//if(!isset($_SESSION['data_user'])){ //Proteccion de acceso por la url
-		//	redirect('login','refresh');//envia a login y refrezcs
+		if(!isset($_SESSION['data_user'])){ //Proteccion de acceso por la url
+			redirect('login','refresh');//envia a login y refrezcs
 		}
-		/*
-		$this->data['level'] = $_SESSION['data_user']->level;
-		*/
-	//}
+		
+		$this->data['level'] = $_SESSION['data_user']->nivel;
+		
+	}
 	public function index()	{ 
 		$this->load->view('principal',$this->data);
 	}
@@ -43,6 +43,21 @@ class Admin extends CI_Controller {
 	public function _requisitosProyect(){
 		$idProyect = $this->uri->segment(4);
 		$this->data['idProyect'] = $idProyect;
+		$this->data['level'] = $_SESSION['data_user']->nivel;
 	}
+	public function _contribuidoresProyect(){
+		$idProyect = $this->uri->segment(4);
+		$this->data['idProyect'] = $idProyect;
+	}
+	public function _editarReq(){
+		$idReq = $this->uri->segment(4);
+		$this->data['idRequisito'] = $idReq;
+	}
+	public function _editarProyect(){
+		$idProyect = $this->uri->segment(4);
+		$this->data['idProyect'] = $idProyect;
+	}
+
+	
 	
 }

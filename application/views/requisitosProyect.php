@@ -1,5 +1,6 @@
 <div class="container" id="titulo">
 </div>
+
 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
     <li class="nav-item">
         <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#requisitos" role="tab" aria-controls="pills-home" aria-selected="true">Requisitos</a>
@@ -57,18 +58,21 @@
                                 </button>
                             </td>
                             <td class="d-inline-flex d-none">
-                                <button type="button" id="editarRequisito" class="btn btn-warning btn-sm" value=''>
-                                    Editar
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <!--<?php if ($level==0 || $level==4): ?>
-                                    <button type="button" id="borrarUsuario" class="btn btn-danger" value=''>
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                <?php endif ?>-->
-                                <a href="#" id="proyectoRequerimientos" target="_blank" class="btn btn-primary btn-sm" value=''>
+                            <?php if ($level==1): ?>
+                            <a href="#" id="editarRequisitoFuncional" target="_blank" class="btn btn-warning  btn-sm" value=''>
+                                Editar
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <?php endif ?>
+                                
+                                <a href="#" id="versionesRequisitos" target="_blank" class="btn btn-primary btn-sm" value=''>
                                 Versiones
                                 </a>
+                                <?php if ($level==1): ?>
+                                    <button type="button" id="borrarReqFuncional" class="btn btn-danger btn-sm" value=''>
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                <?php endif ?>
                             </td>
                         </tr> 
                     </tbody>
@@ -95,15 +99,17 @@
                                 </button>
                             </td>
                             <td class="d-inline-flex d-none">
+                            <?php if ($level==1): ?>
                                 <button type="button" id="editarRequisito" class="btn btn-warning btn-sm" value=''>
                                     Editar
                                     <i class="fas fa-edit"></i>
                                 </button>
-                                <!--<?php if ($level==0 || $level==4): ?>
-                                    <button type="button" id="borrarUsuario" class="btn btn-danger" value=''>
+                                <?php endif ?>
+                                <?php if ($level==1): ?>
+                                    <button type="button" id="borrarReqNoFuncional" class="btn btn-danger" value=''>
                                         <i class="fas fa-trash"></i>
                                     </button>
-                                <?php endif ?>-->
+                                <?php endif ?>
                             </td>
                         </tr> 
                     </tbody>
@@ -130,15 +136,17 @@
                                 </button>
                             </td>
                             <td class="d-inline-flex d-none">
+                            <?php if ($level==1): ?>
                                 <button type="button" id="editarRequisito" class="btn btn-warning btn-sm" value=''>
                                     Editar
                                     <i class="fas fa-edit"></i>
                                 </button>
-                                <!--<?php if ($level==0 || $level==4): ?>
-                                    <button type="button" id="borrarUsuario" class="btn btn-danger" value=''>
+                                <?php endif ?>
+                                <?php if ($level==1): ?>
+                                    <button type="button" id="borrarReqRestriccion" class="btn btn-danger" value=''>
                                         <i class="fas fa-trash"></i>
                                     </button>
-                                <?php endif ?>-->
+                                <?php endif ?>
                             </td>
                         </tr> 
                     </tbody>
@@ -150,7 +158,7 @@
         <form class="form-group" id="addRequisito"addPackageInstrument>
 
             <div class="row">
-                <fieldset class="form-group col-sm-1">
+                <fieldset class="form-group col-sm-2">
                     <label>ID Requisito</label>
                     <input type="number" min="1" class="form-control" name="idReq" id="idReq" placeholder="Ex 001" required>
                 </fieldset>		
@@ -158,7 +166,7 @@
                     <label>Version</label>
                     <input type="text" class="form-control" name="versionReq" id="versionReq" placeholder="Number" >
                 </fieldset>	
-                <fieldset class="form-group m-0 col-sm-2">
+                <fieldset class="form-group m-0 col-sm-3">
                     <label>Tipo</label>
                     <select id="tipoReq" name="tipoReq" class="form-control" required>
                         <option value="">--Selecciona el tipo--</option>
@@ -179,11 +187,15 @@
                 </fieldset>
                 <fieldset class="form-group col-sm-2">
                     <label>Interfaz</label>
-                    <textarea type="text" class="form-control" name="interfazReq" id="interfazReq" placeholder="Escribe si depende de una interfaz grafica"></textarea>
+                    <select name="interfazReq" id="interfazReq"  class="form-control" required>
+                        <option value="">--Selecciona--</option>
+                        <option value="Si">Si</option>
+                        <option value="No">No</option>
+                    </select>
                 </fieldset>	
             </div>
             <div class="row mt-2">
-                <fieldset class="form-group m-0 col-sm-2">
+                <fieldset class="form-group m-0 col-sm-3">
                     <label>Importancia para el Cliente</label>
                     <select id="importanciaReq" name="importanciaReq" class="form-control" required>
                         <option value="">--Selecciona--</option>
@@ -194,7 +206,7 @@
                         <option value="maxima">Maxima</option>
                     </select>
                 </fieldset>
-                <fieldset class="form-group m-0 col-sm-2">
+                <fieldset class="form-group m-0 col-sm-3">
                     <label>Prioridad Para el desarrollo</label>
                     <select id="prioridadReq" name="prioridadReq" class="form-control">
                         <option value="">--Selecciona--</option>
@@ -253,6 +265,53 @@
     </div>
   </div>
 </div>
+
+<button hidden id ="triggerModall" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edicion Requisito</h5>
+            <button type="button" id="cargarDatos" class="btn btn-primary ">Cargar Datos</button>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form id="formEditRequisito">
+                <div class="form-group">
+                    <label  class="col-form-label" value="" id="dataHead">ID: </label>
+                    <input  name="editIdRequisito"class="form-control" type="number" id="editIdRequisito" placeholder=""> <!--El name se usa para poder hacer el submit del formulario-->
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Descripcion</label>
+                    <textarea name="editDescripcionRequisito"type="text" class="form-control" id="editDescripcionRequisito" rows="2"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Dependencias</label>
+                    <textarea name="editDependenciaRequisito"type="text" class="form-control" id="editDependenciaRequisito" rows="2"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Version</label>
+                    <input name="editVersionRequisito" type="text" class="form-control" id="editVersionRequisito">
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Estado</label>
+                    <input name="editEstadoRequisito" type="number" class="form-control" id="editEstadoRequisito">
+                </div>
+                <button type="submit" class="btn btn-primary" id="botonEditarRequisito">Editar a Ultima Version</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            
+        </div>
+        </div>
+    </div>
+</div>
+
 <script>
 	var idProyecto = '<? echo $idProyect ?>';
 </script>

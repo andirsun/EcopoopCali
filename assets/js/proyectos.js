@@ -12,9 +12,67 @@ var dataTableOptions = {
 };
 $(function(){ 	
 	console.log(6666);
+	
 	getProyectos();
 	registrar();
+	borrarProyecto();
+	//setNombreSesion();
 });
+function borrarProyecto(){
+	$("body").on("click","#tablaProyectos #borrarProyecto",function(event){
+		event.preventDefault();
+		idseleccion=$(this).attr("value");
+		if(confirm("Deseas Realmente Eliminar el proyecto ? ")){
+			$.ajax({
+				url: base_url + 'admin_ajax/borrarProyecto',
+				type: 'GET',
+				dataType: 'json',
+				data:{id:idseleccion},
+				beforeSend: function () {
+					$("#tablaProyectos").dataTable().fnDestroy();
+				},
+				success: function (r) {
+					if(r.response==2){
+						alert("proyecto Eliminado");
+						getProyectos();
+					}else{
+						alert(r.content);
+					}
+
+					
+					
+					//$("#editIdRequisito").attr('placeholder',idseleccion);
+					
+			
+				},
+				error: function (xhr, status, msg) {
+					console.log(xhr.responseText);
+				}
+			});	
+		}
+	});
+}
+function setNombreSesion(){
+	$.ajax({
+			url: base_url+'admin_ajax/nombreSesion',
+			type: 'GET',
+			dataType: 'json',
+			beforeSend:function() {
+				
+			},
+			success:function(r) {
+				console.log(r);
+				if(r.response == 2) {
+					$("#nombreUsuario").html('<i class="fas fa-user-tie fa-3x ml-3 "></i> ¡Hola!  '+r.content+'<i class="fas fa-circle mr-2 ml-2" style="color:#3ec63e"></i><b><i style="color:#3ec63e">en linea</i></b>');
+					$("#nivelSesion").html('Tu nivel es '+r.nivel);
+					
+				}
+			},
+			error:function(xhr, status, msg) {
+				console.log(xhr.responseText);
+			}
+		});
+}
 function getProyectos(){
 	$.ajax({
 		url: base_url+'admin_ajax/getProyects',
@@ -76,8 +134,13 @@ function buildTrProyect(listProyect) {
 		$(tr).find('#Descripcion').text(el.descripcion);
 		$(tr).find('#editarProyecto').attr('value', el.id);
 		//$(tr).find('#borrarUsuario').attr('value', el.id);
+		$(tr).find("#proyectoSRS").attr('href', base_url+'admin/nav/SRSProyect/'+el.id);
+		$(tr).find("#proyectoContribuidores").attr('href', base_url+'admin/nav/contribuidoresProyect/'+el.id);
+		$(tr).find("#editarProyect").attr('href', base_url+'admin/nav/editarProyect/'+el.id);
 		$(tr).find("#proyectoRequerimientos").attr('href', base_url+'admin/nav/requisitosProyect/'+el.id);
 		$(tr).find("#proyectoRequerimientos").attr('value', el.id);
+		$(tr).find("#borrarProyecto").attr('value', el.id);
+
 		str += $(tr).prop('outerHTML');
 	});
 	return str;

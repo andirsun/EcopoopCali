@@ -11,6 +11,12 @@ class Admin_ajax extends CI_Controller {
 	public function index()	{
 		$this->load->view('admin/index',$this->data);
 	}
+	public function nombreSesion(){
+		$b['content'] = $_SESSION['data_user']->nombre;
+		$b['nivel'] = $_SESSION['data_user']->nivel;
+		$b['response'] = 2;
+		echo json_encode($b);
+	}
 	public function addRequisito(){
 		$array = array(
 			'idRequisito' =>$this->input->get('idReq'),
@@ -106,6 +112,90 @@ class Admin_ajax extends CI_Controller {
 		}
 
 	}
+	public function borrarRequisitoFuncional(){
+		$id=$this->input->get('id');
+		$this->db->where('id',$id)->delete('requerimientos');
+		$b['content'] = "Borrado";
+		$b['response'] = 2;
+		echo json_encode($b);
+	}
+	public function editarRequisitosFuncionales(){
+		$id=$this->input->get('id');
+		$sql = $this->db->select("requerimientos.id,requerimientos.idRequisito,requerimientos.descripcion,requerimientos.dependencia,requerimientos.version,requerimientos.estado")->where('requerimientos.id',$id)->get('requerimientos');
+		$b['content'] = $sql->result()[0];
+		$b['response'] = 2;
+		echo json_encode($b);
+	}
+	public function updateRequisito(){
+		$id=$this->input->get('editIdRequisito');
+		$a = array(
+			'descripcion' => $this->input->get('editDescripcionRequisito'),
+			'dependencia' => $this->input->get('editDependenciaRequisito'), // int 
+			'version' => $this->input->get('editVersionRequisito'), // string: yyyy-mm-dd
+			'estado' => $this->input->get('editEstadoRequisito') // string: yyyy-mm-dd
+		);
+		$this->db->where('id',$id)->update('requerimientos',$a);
+		$b['content'] = "Actualizado con exito";
+		$b['response'] = 2;
+		echo json_encode($b);
+	}
+	public function contribuidoresPorProyecto(){
+		$id=$this->input->get('id');
+		$sql = $this->db->select('usuarios.*,usuariosxProyecto.*')->where('usuariosxProyecto.idProyecto',$id)->where('usuarios.nivel',2)->join('usuarios','usuarios.idUser = usuariosxProyecto.idUsuario')->get('usuariosxProyecto');
+		if($sql->num_rows()!=0 ){
+			$b['content'] = $sql->result();
+			$b['response'] = 2;
+		}else{
+			$b['content'] = "No Hay Usuarios Vinculados Con este Proyecto";
+			$b['response'] = 1;
+		}
+		
+		echo json_encode($b);
+	}
+	public function asociarContribuidor(){
+		$nombreUsuario=$this->input->get('nombre');
+		$sql = $this->db->select('idUser')->where('nombre',$nombreUsuario)->get('usuarios');//Conpruebo si existe el usuario para agregarlo
+		if($sql->num_rows()!=0 ){
+			$r = array(
+				'idProyecto'=>$this->input->get('id'),
+				'idUsuario'=>$sql->result()[0]->idUser,
+				'date' =>date('y-m-d')
+			);
+			$this->db->insert('usuariosxProyecto',$r);
+			$b['content'] = "Usuario Encontrado y vinculado con exito";
+			$b['response'] = 2;
+			$b['array'] = $r;
+		}else{
+			$b['content'] = "No se Encontro El usuario";
+			$b['response'] = 1;
+		}
+		echo json_encode($b);
+	}	
+	public function borrarContribuidor(){
+		$idContribuidor = $this->input->get('id');
+		$idProyecto = $this->input->get('idProyecto');
+		$this->db->where('idUsuario',$idContribuidor)->where('idProyecto',$idProyecto)->delete('usuariosxProyecto');
+		$b['content'] = "Usuario Desvinculado Del Proyecto";
+		$b['response'] = 2;
+		echo json_encode($b);
+	
+	}
+	public function borrarProyecto(){
+
+		$id = $this->input->get('id');
+		if($_SESSION['data_user']->nivel ==1){
+			$this->db->where('id',$id)->delete('proyectos');
+			$b['content'] = "Proyecto Eliminado";
+			$b['response'] = 2;
+		}
+		else{
+			$b['content'] = "No Tienes Persmisos Para Borrar Proyectos";
+			$b['response'] = 1;
+		}
+		
+		echo json_encode($b);
+
+	}
 	public function nombreProyecto(){
 		$id=$this->input->get('id');
 		$sql = $this->db->select('nombre')->where('id',$id)->get('proyectos');
@@ -122,14 +212,20 @@ class Admin_ajax extends CI_Controller {
 	}
 	public function getProyects(){ //Para llenar la tabla de los usuarios
 		//$sql = $this->db/*->where('creador',$_SESSION['nombre'])*/->order_by('nombre asc')->get('proyectos'); //ordena pro orden alfabetico
-		$sql = $this->db->get('proyectos');
+		if ( ($_SESSION['data_user']->nivel) ==1){
+			$sql = $this->db->get('proyectos');
+		}
+		else{
+			$sql = $this->db->select('proyectos.*,usuariosxProyecto.idProyecto idddd,usuariosxProyecto.idUsuario')->where("usuariosxProyecto.idUsuario",$_SESSION['data_user']->idUser)->join('usuariosxProyecto','usuariosxProyecto.idProyecto = proyectos.id')->get('proyectos');
+		}
 		$r['response'] = 2;
 		$r['content'] = $sql->result();
+		$r['idUsuario'] = $_SESSION['data_user']->idUser;
 		echo json_encode($r);
 	}
 	public function getRequisitosFuncionales(){ //Para llenar la tabla de losRequisitos 
 		$idProyecto=$this->input->get('id');
-		$sql = $this->db->select('requerimientos.idRequisito reqId,agregado,descripcion,version,interfaz,dependencia,estado,requisitosxProyecto.*')->where('idProyecto',$idProyecto)->where('tipo',"funcional")->join('requerimientos','requerimientos.id = requisitosxProyecto.idRequisito')->get('requisitosxProyecto');
+		$sql = $this->db->select('requisitosxProyecto.idRequisito,requerimientos.idRequisito reqId,agregado,descripcion,version,interfaz,dependencia,estado,requisitosxProyecto.*')->where('idProyecto',$idProyecto)->where('tipo',"funcional")->join('requerimientos','requerimientos.id = requisitosxProyecto.idRequisito')->get('requisitosxProyecto');
 		$r['response'] = 2;
 		$r['content'] = $sql->result();
 		$r['idRequisito'] = $idProyecto;

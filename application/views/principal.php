@@ -35,6 +35,9 @@
 			</main>
 		</div>
 	</div>
+	<script>
+	var level = '<? echo $level ?>';
+	</script>
 	<script src="<?php echo base_url() ?>assets/js/bootstrap.min.js"></script>
 	<script src="<?php echo base_url() ?>assets/js/plugins/dataTable/datatables.min.js"></script>
 	<script src="<?php echo base_url() ?>assets/js/plugins/jquery-number/jquery.number.min.js"></script>
