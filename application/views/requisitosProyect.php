@@ -1,5 +1,11 @@
 <div class="container" id="titulo">
 </div>
+<!--
+Anderson Laverde 
+ander.laverde.dev@gmail.com
+4 de junio de 2019
+Frontend de la aplicacion con php y html
+-->
 
 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
     <li class="nav-item">

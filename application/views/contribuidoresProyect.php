@@ -1,4 +1,10 @@
 <h1>Contribuidores del Proyecto <?php echo $idProyect?></h1>
+<!--
+Anderson Laverde 
+ander.laverde.dev@gmail.com
+4 de junio de 2019
+Frontend de la aplicacion con php y html
+-->
 <form class="form-inline" id="searchUser">
   <div class="form-group mb-2">
     <label for="staticEmail2" class="sr-only">Email</label>

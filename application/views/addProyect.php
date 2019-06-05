@@ -1,3 +1,9 @@
+<!--
+Anderson Laverde 
+ander.laverde.dev@gmail.com
+4 de junio de 2019
+Frontend de la aplicacion con php y html
+-->
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 <h1>Nuevo Proyecto</h1>
 </div>

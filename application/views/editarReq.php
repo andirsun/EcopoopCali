@@ -1,4 +1,9 @@
-    
+<!--
+Anderson Laverde 
+ander.laverde.dev@gmail.com
+4 de junio de 2019
+Frontend de la aplicacion con php y html
+-->
 <div class="container-fluid">
     <form id="formEditRequisito">
         <div class="form-group">

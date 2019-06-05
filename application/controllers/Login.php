@@ -1,4 +1,10 @@
 <?php
+/*
+Anderson Laverde 
+ander.laverde.dev@gmail.com
+4 de junio de 2019
+Backend del manejador de vistas de codeigniter, junto con las variables de sesion
+*/
 defined('BASEPATH') OR exit('No direct script access allowed');
 header('Access-Control-Allow-Origin: *');
 class Login extends CI_Controller{

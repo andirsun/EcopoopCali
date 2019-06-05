@@ -1,6 +1,11 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 //Generado desde el servidorr
-
+/*
+Anderson Laverde 
+ander.laverde.dev@gmail.com
+4 de junio de 2019
+Backend De la aplicacion
+*/
 class Admin_ajax extends CI_Controller {
 	private $data;
 	public function __construct(){
