@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Mis Proyectos</h1>
+    <h1 class="h2">Clientes</h1>
 </div>
-<a href="<?php echo base_url() ?>admin/nav/addProyect" class="btn btn-success mb-3">Crear Nuevo Proyecto</a>
+<a href="<?php echo base_url() ?>admin/nav/addProyect" class="btn btn-success mb-3">Vincular Nueva Unidad</a>
     <table class="table table-striped table-hover table-responsive" id="tablaProyectos">
         <thead class="thead-dark">
             <tr id="trClone2">
@@ -15,20 +15,20 @@
         <tbody>  
             <tr id="trClone">
                 <th scope="row"  id="idProyecto">ID</th>
-                <td id="Creacion">Creacion</td>
+                <td id="Creacion">Vinculacion</td>
                 <td id="Nombre">Nombre </td>
                 <td id="Descripcion">Descripcion</td>
                 <td class="d-inline-flex d-none">
-                    <a href="#" id="proyectoContribuidores" target="_blank" class="btn btn-success mr-3 btn-sm" value=''>
+                    <a href="#" id="proyectoContribuidores"  class="btn btn-success mr-3 btn-sm" value=''>
                         Contribuidores
                         <i class="fas fa-users"></i>
                     </a>
                     
-                    <a href="#" id="proyectoSRS" target="_blank" class="btn btn-danger mr-3 btn-sm" value=''>
-                        SRS
+                    <a href="#" id="proyectoSRS" class="btn btn-danger mr-3 btn-sm" value=''>
+                        Contrato
                         <i class="fas fa-file-download"></i>
                     </a>
-                    <a href="#" id="editarProyect" target="_blank" class="btn btn-warning mr-3 btn-sm" value=''>
+                    <a href="#" id="editarProyect" class="btn btn-warning mr-3 btn-sm" value=''>
                         Editar Proyecto
                         <i class="fas fa-edit"></i>
                     </a>
@@ -79,4 +79,4 @@
     </div>
     --> 
 
-    <script src="<?php echo base_url() ?>assets/js/proyectos.js?"></script>
+    <script src="<?php echo base_url() ?>assets/js/proyectos.js?<? echo time_unix(); ?>"></script>

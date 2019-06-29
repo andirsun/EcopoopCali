@@ -80,7 +80,7 @@ $autoload['libraries'] = array('database','session');
 |
 */
 $autoload['drivers'] = array();
-
+$autoload['time_zone'] = date_default_timezone_set('America/Bogota');
 /*
 | -------------------------------------------------------------------
 |  Auto-load Helper Files
@@ -89,7 +89,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url','cookie','file','date','security');
+$autoload['helper'] = array('url','cookie','file','date','security','dev');
 
 /*
 | -------------------------------------------------------------------

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
 html,body{
-    /*background-image: url('http://localhost/sigere/assets/images/login.jpg');*/
+    background-image: url('https://www.sigere.site/assets/images/logo3.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     height: 100%;
@@ -38,7 +38,7 @@ html,body{
     
     .input-group-prepend span{
     width: 50px;
-    background-color: rgb(24, 95, 202);
+    background-color: #7cb342;
     color: black;
     border:0 !important;
     }
@@ -52,7 +52,7 @@ html,body{
     
     .login_btn{
     color: black;
-    background-color:rgb(24, 95, 202);
+    background-color:#7cb342;
     width: 100px;
     }
     
