@@ -215,7 +215,7 @@ class Admin_ajax extends CI_Controller {
 		echo json_encode($b);
 		
 	}
-	public function getProyects(){ //Para llenar la tabla de los usuarios
+	public function getProyects(){ 
 		//$sql = $this->db/*->where('creador',$_SESSION['nombre'])*/->order_by('nombre asc')->get('proyectos'); //ordena pro orden alfabetico
 		if ( ($_SESSION['data_user']->nivel) ==1){
 			$sql = $this->db->get('proyectos');

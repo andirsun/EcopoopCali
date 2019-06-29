@@ -19,11 +19,15 @@
 	<script src="<?php echo base_url() ?>assets/js/jquery-3.3.1.min.js" type="text/javascript"></script>
 	<!--<script>var active = '<?echo $view ?>';  var base_url = '<?echo base_url() ?>'; ?></script>-->
 	<script> var base_url = '<?echo base_url() ?>'</script>
-	<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+	<nav class="navbar navbar-dark fixed-top  flex-md-nowrap p-0 shadow" style="background-color:#7cb342;" >
 		<!-- <span class="navbar-brand col-sm-3 col-md-2 mr-0 titleMenu">Academia Eddy Music</span> -->
-		<span class="navbar-brand pl-2 pr-3 titleMenu">Sistema Gestor de Requisitos</span>
+		<span class="navbar-brand pl-2 pr-3 titleMenu">Ecopoop Cali SAS</span>
 		<!-- <input class="form-control form-control-dark w-100" type="text" placeholder="Buscar" aria-label="Search"> -->
-		<button class="navbar-toggler" id="toggleMenu" data-status="0">
+		<form class="form-inline my-2 my-lg-0">
+      		<input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
+      		<button class="btn btn-outline-dark my-2 my-sm-0 bg-light" type="submit">Buscar</button>
+    	</form>
+		<button class="navbar-toggler" style="background-color:grey;" id="toggleMenu" data-status="0">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 	</nav>
@@ -35,12 +39,12 @@
 			</main>
 		</div>
 	</div>
-	<script>
+	<!--<script>
 	var level = '<? echo $level ?>';
-	</script>
+	</script>-->
 	<script src="<?php echo base_url() ?>assets/js/bootstrap.min.js"></script>
 	<script src="<?php echo base_url() ?>assets/js/plugins/dataTable/datatables.min.js"></script>
 	<script src="<?php echo base_url() ?>assets/js/plugins/jquery-number/jquery.number.min.js"></script>
-	<script src="<?php echo base_url() ?>assets/js/principal.js?"></script>
+	
 	</body>
 </html>
