@@ -10,7 +10,7 @@
   <!-- Bootstrap -->
   <link href="<?php echo base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet"> <!-- la base url es la pagina y el resto es la ruta donde se encuentra-->
 
-  <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/login.css<? echo time_unix(); ?>">
+  <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/login.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
 
@@ -55,11 +55,11 @@
             </div>
 	</div>
 </div>  
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js<? echo time_unix(); ?>"></script>
-  <script src="<?php echo base_url() ?>assets/js/jquery-3.3.1.min.js<? echo time_unix(); ?>" type="text/javascript"></script>
-  <script src="<?php echo base_url() ?>assets/js/bootstrap.min.js<? echo time_unix(); ?>"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="<?php echo base_url() ?>assets/js/jquery-3.3.1.min.js" type="text/javascript"></script>
+  <script src="<?php echo base_url() ?>assets/js/bootstrap.min.js"></script>
   <script src="<?php echo base_url() ?>assets/js/main.js?<?php echo strtotime(date('Y-m-d H:i:s')) ?>"></script>
-  <script src="<?php echo base_url() ?>assets/js/login.js?<? echo time_unix(); ?>"></script>
+  <script src="<?php echo base_url() ?>assets/js/login.js?"></script>
   
 </body>
 
