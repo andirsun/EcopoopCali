@@ -1,4 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
+
 //Generado desde el servidorr
 /*
 Anderson Laverde 
@@ -22,6 +23,80 @@ class Admin_ajax extends CI_Controller {
 		$b['response'] = 2;
 		echo json_encode($b);
 	}
+	public function addEgresoEfectivo(){
+		$r = array(
+			'date'=> date('Y-m-d'),
+			'value'=>$this->input->get('valorEgresoEfectivo'),
+			'tipo'=>0,
+			'description'=>$this->input->get('descripcionEgresoEfectivo'),
+			//'idSucursal'=> $_SESSION['sucursal'],
+			'category'=>$this->input->get('categoriaEgresoEfectivo'),
+			'person'=>$this->input->get("responsableEgresoEfectivo")
+		);
+		$this->db->insert('egresos',$r);
+		$ultimoid = $this->db->insert_id();
+		//$this->mainModel->addLog('Egreso Efectivo Añadido','',$ultimoid);
+		$sql = $this->db->where('id',$ultimoid)->get('egresos')->result();
+		$b['content'] = $sql;
+		$b['response'] = 2;
+		echo json_encode($b);
+	}
+	public function getEgresosEfectivo(){
+		$sql = $this->db->select('id,date,tipo,category,person,value,description')->where('tipo',0)/*->where('idSucursal',$_SESSION['sucursal'])*/->get('egresos'); //0 para medio pago efectivo 1 para medio pago banco 
+		$r['response'] = 2;	
+		$r['content'] = $sql->result();
+		echo json_encode($r);
+	}
+	public function enviarDiagrama1(){
+		$id = $this->input->post('idEgreso');
+		$file = file_get_contents($_FILES['file']['tmp_name']);
+		$this->db->set('bill',$file)->set('date',date('Y-m-d'))->update('egresos');
+		$r['response'] = 2;
+		$r['content'] = 'saved';
+		$r['id'] = $id;
+		echo json_encode($r);
+	}
+	public function getDiagrama1(){
+		$id = $this->input->get('idRequisito');
+		//$sql = $this->db->where('idRequisito',$id)->get('requerimientos');
+		$sql = $this->db->where('id',$id)->get('egresos');
+		$r['response'] = 2;
+		if($sql->num_rows()==0){
+			$r['file'] = null;
+			$r['id'] = $id;
+		}else{
+			$r['file'] = base64_encode($sql->result()[0]->bill);
+			$r['id'] = $id;
+		}
+		echo json_encode($r);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	public function addRequisito(){
 		$array = array(
 			'idRequisito' =>$this->input->get('idReq'),
@@ -215,7 +290,7 @@ class Admin_ajax extends CI_Controller {
 		echo json_encode($b);
 		
 	}
-	public function getProyects(){ 
+	public function getProyectsssss(){ 
 		//$sql = $this->db/*->where('creador',$_SESSION['nombre'])*/->order_by('nombre asc')->get('proyectos'); //ordena pro orden alfabetico
 		if ( ($_SESSION['data_user']->nivel) ==1){
 			$sql = $this->db->get('proyectos');
@@ -278,44 +353,6 @@ class Admin_ajax extends CI_Controller {
 		$r['content'] = $_SESSION['data_user']->level;
 		echo json_encode($r);
 	}
-	public function enviarDiagrama1(){
-		$id = $this->input->post('idRequisito');//llega el id largo del requisito
-		$file = file_get_contents($_FILES['file']['tmp_name']);
-		$idGlobal = $this->db->select('requerimientos.id')->where('idRequisito',$id)->get('requerimientos')->result();
-		//$check = $this->db->where('idRequisito',$idGlobal)->get('requerimientos')->num_rows() > 0;
-		
-		$a = array(
-			'diagrama1' => $file
-		);
-		
-		$this->db->where('id',$id)->update('requerimientos',$a);
-		//if($check){
-			//$this->db->where('id',$idGlobal)->update('requerimientos',$a);
-		//}
-		/*else{
-			$a['idRequisito'] = $idGlobal;
-			$this->db->insert('requerimientos',$a);
-		*/
-		//}
-		$r['response'] = 2;
-		$r['content'] = 'saved';
-		$r['idRequisito'] = $id;
-		echo json_encode($r);
-	}
-	public function getDiagrama1(){
-		$id = $this->input->get('idRequisito');
-		//$sql = $this->db->where('idRequisito',$id)->get('requerimientos');
-		$sql = $this->db->where('id',$id)->get('requerimientos');
-
-		$r['response'] = 2;
-		if($sql->num_rows()==0){
-			$r['file'] = null;
-			$r['id'] = $id;
-		}else{
-
-			$r['file'] = base64_encode($sql->result()[0]->diagrama1);
-			$r['id'] = $id;
-		}
-		echo json_encode($r);
-	}
+	
+	
 }

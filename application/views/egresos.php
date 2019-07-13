@@ -1,4 +1,4 @@
-<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+<ul class="nav nav-pills mb-3 p-3" id="pills-tab" role="tablist">
     <li class="nav-item">
         <a class="nav-link active" id="tabIngresos" data-toggle="pill" href="#egresoEfectivo" role="tab" aria-controls="pills-home" aria-selected="true">Efectivo</a>
     </li>
@@ -6,7 +6,7 @@
         <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#egresoBancos" role="tab" aria-controls="pills-profile" aria-selected="false">Bancos</a>
     </li>
 </ul>
-<div class="tab-content" id="pills-tabContent">
+<div class="tab-content p-2" id="pills-tabContent">
     <div class="tab-pane fade show active" id="egresoEfectivo" role="tabpanel" aria-labelledby="pills-home-tab">
         <button type="button" class="btn btn-danger mb-2" data-toggle="modal" data-target="#modalEgresoEfectivo" data-whatever="@mdo">Agregar Nuevo Egreso</button>
         <div  id="flujoCaja" class="container-fluid">
@@ -35,28 +35,37 @@
         <table class="table table-striped table-hover table-responsive-sm" id="tablaEgresosEfectivo">
             <thead class="thead-dark">
                 <tr>
-                    <th id="fecha">Fecha</th>
-                    <th id="concepto">Concepto Egreso</th>
-                    <th id="descripcion">Descripcion</th>
-                    <th id="valor">Valor</th>
-                    <th id="accionesEgreso">Acciones</th>
+                    <th>Fecha</th>
+                    <th>Categoria</th>
+                    <th>Descripcion</th>
+                    <th>Responsable</th>
+                    <th>Valor</th>
+                    <th>Factura PDF</th>
+                    <th>Acciones</th>
 
                 </tr>
             </thead>
             <tbody>
                 <tr id="trClone">
-                        <th scope="row" id="fecha"></th>
-                        <td id="concepto"></td>          
-                        <td id="descripcion"></td>
-                        <td id="valor"></td>
-                        <td class="d-inline-flex">
-                            <?php if ($level==0 || $level==4): ?>
-                                <button type="button" id="borrarEgresoEfectivo" class="btn btn-danger ml-4" value=''>
-                                  <i class="fas fa-trash"></i>
-                                </button>
-                            <?php endif ?>
-                        </td>
-                    </tr>  
+                    <th scope="row" id="fecha"></th>
+                    <td id="categoria"></td>          
+                    <td id="descripcion"></td>
+                    <td id="responsable"></td>
+                    <td id="valor"></td>
+                    <td id="factura">
+                        <button type="button" value ="" class="btn btn-success btn-sm" id="diagrama1">
+                            Factura
+                            <i class="far fa-file-pdf ml-2"></i>
+                        </button>
+                    </td>
+                    <td class="d-inline-flex">
+                        <?php if ($level==0 /*|| $level==4*/): ?>
+                            <button type="button" id="borrarEgresoEfectivo" class="btn btn-danger ml-4" value=''>
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        <?php endif ?>
+                    </td>
+                </tr>  
             </tbody>
         </table>
     </div>
@@ -132,8 +141,8 @@
             </div>
             <div class="form-row align-items-center">
                 <div class="col-auto my-1">
-                    <label class="mr-sm-2" for="conceptoEgresoEfectivo">Concepto</label>
-                    <select name="conceptoEgresoEfectivo"class="custom-select mr-sm-2" id="conceptoEgresoEfectivo">
+                    <label class="mr-sm-2" for="categoriaEgresoEfectivo">Categoria:</label>
+                    <select name="categoriaEgresoEfectivo"class="custom-select mr-sm-2" id="categoriaEgresoEfectivo">
                         <option selected>Seleccione...</option>
                         <option value="Inversion">Inversion</option>
                         <option value="Mantenimiento">Mantenimiento</option>
@@ -151,6 +160,10 @@
             <div class="form-group">
                 <label  class="col-form-label">Descripcion Egreso:</label>
                 <textarea name="descripcionEgresoEfectivo"class="form-control" id="descripcionEgresoEfectivo"></textarea>
+            </div>
+            <div class="form-group">
+                <label  class="col-form-label">Responsable:</label>
+                <input type="text" name="responsableEgresoEfectivo"class="form-control" id="responsableEgresoEfectivo">
             </div>
             <button type="submit" class="btn btn-primary" id="addEgresoEfectivo">Agregar</button>
             </form>
@@ -218,3 +231,39 @@
 </div>
 <script src="<?echo base_url() ?>assets/js/egresos.js?<?echo time_unix(); ?>"></script>
 <!-- Aca se acaba el modal para agregar un nuevo ingreso-->
+
+
+
+<button type="hidden" hidden data-toggle="modal" data-target=".bd-example-modal-lg" id="abrirModalDiagrama1"></button>
+<!-- Modal para ver el archivo pdf de la hoja de vida usuario -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content p-2">
+      <h2>Factura</h2>
+      <iframe src="" id="iframe-pdf" class="mb-2" style="display:none;width:100%;height:400pt;" frameborder="0"></iframe>
+      <form class="d-inline-block mt-4" id="formDiagrama1">
+        <input type="hidden" id="idRequisito">
+        <div class="d-flex mb-2">
+          <input type="file" name="file" id="file-cv" class="" accept="application/pdf" required>
+          <!--<label for="file-cv" class="">
+            <span class="one-file">1 archivo</span>
+            <i class="fas fa-file-upload mr-1"></i>
+            Seleccionar archivo
+          </label>-->
+          <button type="submit" class="btn btn-success rounded-0">
+            <i class="fas fa-save mr-1"></i> Guardar 
+          </button>
+          <!--
+          <button type="button" class="ml-1 btn btn-danger rounded-0" id="clearInputFileCv">
+            <i class="fas fa-eraser mr-1"></i> Limpiar
+          </button>-->
+        </div>
+        <!-- <div class="progress-bard-file" id="progress" style="display: none;"></div>
+<!--         <span class="num-files" id="file-cv-info">
+          nombre del archivo
+        </span> -->
+        <div id="msg-cv" class="alert" style="display: none;"></div>
+      </form>
+    </div>
+  </div>
+</div>

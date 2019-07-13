@@ -1,4 +1,4 @@
-<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+<ul class="nav nav-pills mb-3 p-3" id="pills-tab" role="tablist">
     <li class="nav-item">
         <a class="nav-link active" id="tabIngresos" data-toggle="pill" href="#ingresosEfectivo" role="tab" aria-controls="pills-home" aria-selected="true">Efectivo</a>
     </li>
@@ -6,7 +6,7 @@
         <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#ingresosBancos" role="tab" aria-controls="pills-profile" aria-selected="false">Bancos</a>
     </li>
 </ul>
-<div class="tab-content" id="pills-tabContent">
+<div class="tab-content p-2" id="pills-tabContent">
     <div class="tab-pane fade show active" id="ingresosEfectivo" role="tabpanel" aria-labelledby="pills-home-tab">
         <button type="button" class="btn btn-success mb-2" data-toggle="modal" data-target="#modalIngresoEfectivo" data-whatever="@mdo">Agregar Nuevo Ingreso</button>
         <div  id="flujoCaja" class="container-fluid">
