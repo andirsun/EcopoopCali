@@ -14,25 +14,24 @@
 
         </div>
         <div class="form-group  row no-gutters">
-            <label for="inputEmail3" class="col-sm-1 col-form-label">Mostrar Desde :</label>
-            <div class="col-sm-3 mr-2">
+            <label for="inputEmail3" class="col-sm-1 col-form-label">Desde:</label>
+            <div class="col-sm-2 mr-2">
                 <input type="date" class="form-control" id="inicioFiltroDateEgresosEfectivo" placeholder="YYYY-MM-DD">
             </div>
             <label for="inputEmail3" class="col-sm-0 col-form-label mr-2">Hasta:</label>
-            <div class="col-sm-3 mr-2">
+            <div class="col-sm-2 mr-2">
                 <input type="date" class="form-control" id="finFiltroDateEgresosEfectivo" placeholder="YYYY-MM-DD"  >
             </div>
-            
             <div class="col-sm-0 mr-2">
                 <button type="button" class="btn btn-primary" id="botonFiltrarEgresosEfectivo">
                     <i class="fas fa-search"></i>
                 </button> 
             </div>
-            <div class="col-sm-2 mr-2 ml-2"> 
+            <div class="col-sm-3 mr-2 ml-2"> 
                 <input type="text"  class="form-control" id="dineroEgresos" placeholder="Dinero" readonly>
             </div>
     </div>
-        <table class="table table-striped table-hover table-responsive-sm" id="tablaEgresosEfectivo">
+        <table class="table table-striped table-hover table-responsive" id="tablaEgresosEfectivo">
             <thead class="thead-dark">
                 <tr>
                     <th>Fecha</th>
@@ -59,7 +58,7 @@
                         </button>
                     </td>
                     <td class="d-inline-flex">
-                        <?php if ($level==0 /*|| $level==4*/): ?>
+                        <?php if ($level==1 ): ?>
                             <button type="button" id="borrarEgresoEfectivo" class="btn btn-danger ml-4" value=''>
                                 <i class="fas fa-trash"></i>
                             </button>
@@ -93,7 +92,7 @@
                 <input type="text"  class="form-control" id="dineroEgresosBanco" placeholder="Dinero" readonly>
             </div>
         </div>
-        <table class="table table-striped table-hover table-responsive-sm" id="tablaEgresosBanco">
+        <table class="table table-striped table-hover table-responsive" id="tablaEgresosBanco">
             <thead class="thead-dark">
                 <tr >
                     <th id="fecha">Fecha</th>
@@ -112,7 +111,7 @@
                     <td id="descripcion"></td>
                     <td id="valor"></td>
                     <td class="d-inline-flex">
-                        <?php if ($level==0 || $level==4): ?>
+                        <?php if ($level==1 ): ?>
                             <button type="button" id="borrarEgresoBanco" class="btn btn-danger ml-4" value=''>
                               <i class="fas fa-trash"></i>
                             </button>

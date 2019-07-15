@@ -12,10 +12,11 @@ class Admin_ajax extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		//$this->sucursal = $_SESSION['sucursal'];
-		$this->data = array('view'=>'addUser');
+		
 	}
 	public function index()	{
 		$this->load->view('admin/index',$this->data);
+		
 	}
 	public function nombreSesion(){
 		$b['content'] = $_SESSION['data_user']->nombre;
@@ -42,6 +43,7 @@ class Admin_ajax extends CI_Controller {
 		echo json_encode($b);
 	}
 	public function getEgresosEfectivo(){
+		
 		$sql = $this->db->select('id,date,tipo,category,person,value,description')->where('tipo',0)/*->where('idSucursal',$_SESSION['sucursal'])*/->get('egresos'); //0 para medio pago efectivo 1 para medio pago banco 
 		$r['response'] = 2;	
 		$r['content'] = $sql->result();
@@ -68,6 +70,43 @@ class Admin_ajax extends CI_Controller {
 			$r['file'] = base64_encode($sql->result()[0]->bill);
 			$r['id'] = $id;
 		}
+		echo json_encode($r);
+	}
+	public function flujoDeCajaEfectivo(){
+		$egresos=$this->db->select('sum(value) as egresos')->get('egresos')->result()[0]->egresos;
+		$r['response'] = 2;
+		$r['content'] = $egresos;
+		echo json_encode($r);
+	}
+	public function deleteEgreso(){
+		$id = $this->input->get('id');
+		$this->db->where('id',$id)->delete('egresos');
+		//$this->mainModel->addLog('Egreso Borrado','',$id);
+		$r['response'] = 2;
+		$r['content'] = 'Egreso Borrado ';
+		echo json_encode($r);
+	}
+	public function calcularDineroEgresos(){
+		$fechaInicio= $this->input->get('fechaInicio');
+		$fechaFin= $this->input->get('fechaFin');
+		$this->db->select_sum('value');
+		$this->db->from('egresos');
+		$this->db->where('egresos.date >=',$fechaInicio);
+		$this->db->where('egresos.date <=',$fechaFin);
+		$sql=$this->db->get();
+		$r['response'] = 2;
+		$r['content'] = $sql->result();
+		echo json_encode($r);
+	}
+	public function filtrarEgresosEfectivo(){
+		$fechaInicio= $this->input->get('fechaInicio');
+		$fechaFin= $this->input->get('fechaFin');
+		$sql = $this->db->where('date >=',$fechaInicio.' 00:00:00')->where('date <=',$fechaFin.' 23:59:59')->get('egresos')->result(); 
+		/*echo '<pre>';
+			var_dump($sql);
+		echo '</pre>';*/
+		$r['response'] = 2;	
+		$r['content'] = $sql;
 		echo json_encode($r);
 	}
 

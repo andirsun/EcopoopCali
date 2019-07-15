@@ -12,14 +12,15 @@ class Admin extends CI_Controller {
 	private $data;
 	public function __construct(){
 		parent::__construct();
-		$this->data = array('view'=>'registro');
-		//$this->sucursal = $_SESSION['sucursal'];
-		
+		$this->data = array('view'=>'clientes');
 		if(!isset($_SESSION['data_user'])){ //Proteccion de acceso por la url
-			redirect('login','refresh');//envia a login y refrezcs
+			redirect('login','refresh');//envia a al controlador login , que por defecto va al metodo index y refrezca la pagina 
 		}
 		
 		$this->data['level'] = $_SESSION['data_user']->nivel;
+		/*echo '<pre>';
+			var_dump($data);
+		echo '</pre>';*/
 		
 	}
 	public function index()	{ 
@@ -49,7 +50,7 @@ class Admin extends CI_Controller {
 	public function _requisitosProyect(){
 		$idProyect = $this->uri->segment(4);
 		$this->data['idProyect'] = $idProyect;
-		$this->data['level'] = $_SESSION['data_user']->nivel;
+		//$this->data['level'] = $_SESSION['data_user']->nivel;
 	}
 	public function _contribuidoresProyect(){
 		$idProyect = $this->uri->segment(4);

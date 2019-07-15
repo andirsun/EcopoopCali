@@ -11,7 +11,7 @@ class Login extends CI_Controller{
 	private $data;
 	public function __construct(){
 		parent::__construct();
-		$this->data = array('view'=>'proyectos');
+		$this->data = array('view'=>'clientes');
 	}
     public function index(){
         $this->load->view('index');
@@ -30,6 +30,10 @@ class Login extends CI_Controller{
 		}else{	
 			$response = 1;
 		}
+		/*echo '<pre>';
+			var_dump($_SESSION);
+			var_dump($this->data);
+		echo '</pre>';*/
 		$r['response'] = $response;
 		echo json_encode($r);
 	}
@@ -39,9 +43,9 @@ class Login extends CI_Controller{
 
 	}
 	
-	public function registro()	{ // siempre debe ir aqui 
+	/*public function registro()	{ // siempre debe ir aqui 
 		$this->load->view('registro');//el segundo paramento $this->data es que le paso paramentro a esa vista $this->data = array('view'=>'home');
-	}
+	}*/
 	
     public function verDatos(){
 		echo '<pre>';

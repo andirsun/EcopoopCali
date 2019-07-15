@@ -17,16 +17,16 @@ $(function() {
     //$('#tableEgresosBancos').DataTable(dataTableOptions);
 
     //flujoDeCajaBanco();
-    //deleteEgresoEfectivo();
+    deleteEgresoEfectivo();
     //deleteEgresoBanco();
-    //flujoDeCajaEfectivo();
+    flujoDeCajaEfectivo();
     añadirEgresoEfectivo();
     //añadirEgresoBanco();
-    //ponerEgresosEfectivoPorFecha();
+    ponerEgresosEfectivoPorFecha();
     //ponerEgresosBancoPorFecha();
     getEgresosEfectivo();
     //getEgresosBancos();
-    //filtrarEgresosEfectivo();
+    filtrarEgresosEfectivo();
     //filtrarEgresosBanco();
     formatoMoneda();
     verArchivo1();
@@ -244,7 +244,7 @@ function ponerEgresosEfectivoPorFecha() {
             },
             success: function(r) {
                 //console.log("Ingresos Sumatoria",r.content);
-                var precio = r.content[0].valor;
+                var precio = r.content[0].value;
                 var contenido = "Saldo: $" + $.number(precio, 0, '', '.') + " Pesos.";
                 $("#dineroEgresos").val(contenido);
                 //$("#dineroEgresos").val(r.content[0].valor);	
@@ -313,7 +313,7 @@ function getEgresosEfectivo() {
             $(tableBody).html(str);
             table = $("#tablaEgresosEfectivo").DataTable({
                 "order": [
-                    [1, "desc"]
+                    [0, "desc"]
                 ]
             });
             //flujoDeCajaEfectivo();
@@ -367,11 +367,16 @@ function filtrarEgresosEfectivo() {
                 $("#tablaEgresosEfectivo").dataTable().fnDestroy(); //Toca Hacer esto para que no aparezca el error de  DataTables warning: table id={id} - Cannot reinitialise DataTable.
             },
             success: function(r) {
-                console.log('list users \n', r);
+                console.log('resultado \n', r.content);
+
                 var tableBody = $('#tablaEgresosEfectivo').find("tbody");
                 var str = buildTrUserEfectivo(r.content);
                 $(tableBody).html(str);
-                table = $("#tablaEgresosEfectivo").DataTable(dataTableOptions);
+                table = $("#tablaEgresosEfectivo").DataTable({
+                    "order": [
+                        [0, "desc"]
+                    ]
+                });
                 console.log(table);
             },
             error: function(xhr, status, msg) {
